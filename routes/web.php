@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/list-page', function () {
-    return view('frontend.listPage');
+    return view('frontend.detail');
 });
