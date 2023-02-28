@@ -41,7 +41,7 @@
 <!-- Main content -->
 
 <!-- End Main content -->
-@yield('content')
+@yield('main')
 <!-- Footer -->
 @include('frontend.layouts.partials.footer')
 <!-- End Footer -->
