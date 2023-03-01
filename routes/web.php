@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use app\Http\Controllers\Frontend\UsersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/list-page', function () {
-    return view('frontend.detail');
+Route::prefix('/')->group(function (){
+    Route::get('/home', function () {
+        return view('frontend.homePage', [UsersController::class, 'home']);
+    });
 });
+
