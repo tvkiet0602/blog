@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use app\Http\Controllers\Frontend\UsersController;
+use App\Http\Controllers\Frontend\UsersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,8 +14,6 @@ use app\Http\Controllers\Frontend\UsersController;
 */
 
 Route::prefix('/')->group(function (){
-    Route::get('/home', function () {
-        return view('frontend.homePage', [UsersController::class, 'home']);
-    });
+    Route::get('/home', [UsersController::class, 'home']);
 });
 
