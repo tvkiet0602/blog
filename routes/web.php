@@ -12,6 +12,7 @@ use app\Http\Controllers\Frontend\UsersController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::prefix('/')->group(function (){
     Route::get('/home', function () {
         return view('frontend.homePage', [UsersController::class, 'home']);
