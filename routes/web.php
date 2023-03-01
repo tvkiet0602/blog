@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.homePage');
+Route::get('/list-page', function () {
+    return view('frontend.listPage');
 });
