@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use app\Http\Controllers\Frontend\UsersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('frontend.homePage');
+Route::prefix('/')->group(function (){
+    Route::get('/home', function () {
+        return view('frontend.homePage', [UsersController::class, 'home']);
+    });
 });
+
