@@ -9,10 +9,12 @@ use App\Models\User;
 
 class UsersController extends Controller
 {
-
     public function home()
     {
-        $posts = Posts::all();
-        return view('frontend.homePage', compact('posts'));
+
+        $posts = Posts::orderByDesc('post_date')->simplePaginate(9);
+        foreach ($posts as $post){
+            return view('frontend.homePage', compact('posts', 'post'));
+        }
     }
 }

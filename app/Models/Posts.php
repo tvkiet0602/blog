@@ -12,7 +12,7 @@ class Posts extends Model
 
     protected $fillable = ['title', 'content', 'img_url', 'categories_id', 'user_id', 'post_date'];
     public function categories(){
-        return $this->belongsTo(Categories::class, 'categories_id');
+        return $this->belongsTo(Categories::class, 'categories_id', 'id');
     }
 
     public function users(){

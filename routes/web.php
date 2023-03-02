@@ -15,5 +15,6 @@ use App\Http\Controllers\Frontend\UsersController;
 
 Route::prefix('/')->group(function (){
     Route::get('/home', [UsersController::class, 'home']);
+
 });
 
