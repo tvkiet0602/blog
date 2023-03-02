@@ -12,7 +12,7 @@
                     <div class="col-lg-4">
                         <div class="post-entry-1 lg">
                             <h2>Bài viết mới nhất</h2>
-                            <a href="detail.blade.php"><img src="{{asset('assets/img/'.$post->img_url)}}" alt="loi"
+                            <a href=""><img src="{{asset('assets/img/'.$post->img_url)}}" alt="Ảnh bài viết mới nhất"
                                                             class="img-fluid"></a>
                             <div class="post-meta"><span class="date">{{$post->categories->name}}</span> <span
                                     class="mx-1">&bullet;</span> <span>{{$post->post_date}}</span></div>

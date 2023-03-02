@@ -14,9 +14,10 @@ use App\Http\Controllers\Frontend\UsersController;
 */
 
 Route::prefix('/')->group(function (){
-    Route::get('/home', [UsersController::class, 'home']);
+    Route::get('/home', [UsersController::class, 'home'])->name('home');
 
     Route::get('/detail/{id}', [UsersController::class, 'detailPosts'])->name('detail');
 
+    Route::match(['post', 'get'], '/add/{id}', [UsersController::class, 'addPosts'])->name('add-posts');
 });
 
