@@ -16,5 +16,7 @@ use App\Http\Controllers\Frontend\UsersController;
 Route::prefix('/')->group(function (){
     Route::get('/home', [UsersController::class, 'home']);
 
+    Route::get('/detail/{id}', [UsersController::class, 'detailPosts'])->name('detail');
+
 });
 
