@@ -1,8 +1,7 @@
 @extends('frontend.layouts.master')
 @section('title')
-    Detail Post
+    HomePage
 @endsection
-
 @section('main')
     <main id="main">
         <section class="single-post-content">
@@ -12,232 +11,91 @@
 
                         <!-- ======= Single Post Content ======= -->
                         <div class="single-post">
-                            <div class="post-meta"><span class="date">Business</span> <span class="mx-1">&bullet;</span>
-                                <span>Jul 5th '22</span></div>
-                            <h1 class="mb-5">13 Amazing Poems from Shel Silverstein with Valuable Life Lessons</h1>
-                            <p><span class="firstcharacter">L</span>orem ipsum dolor sit, amet consectetur adipisicing
-                                elit. Ratione officia sed, suscipit distinctio, numquam omnis quo fuga ipsam quis
-                                inventore voluptatum recusandae culpa, unde doloribus saepe labore alias voluptate
-                                expedita? Dicta delectus beatae explicabo odio voluptatibus quas, saepe qui aperiam
-                                autem obcaecati, illo et! Incidunt voluptas culpa neque repellat sint, accusamus beatae,
-                                cumque autem tempore quisquam quam eligendi harum debitis.</p>
+                            <div class="post-meta"><span class="date"></span>{{$detail->categories->name}}<span
+                                    class="mx-1">&bullet;</span>
+                                <span>{{$detail->created_at}}</span>
+                                <span class="mx-1">&bullet;</span>
+                                {{$detail->users->fullname}}</span>
+                            </div>
+                            <h1 class="mb-5">{{$detail->title}}</h1>
+                            <p><span class="firstcharacter">{{substr($detail->content, 0, 1)}}</span>
+                                <?php
+                                echo substr_replace(substr($detail->content, 1, strpos($detail->content, "\n")), "", strpos($detail->content, "\n"), strlen($detail->content));
+                                ?>
+                            </p>
 
                             <figure class="my-4">
-                                <img src="assets/img/post-landscape-1.jpg" alt="" class="img-fluid">
-                                <figcaption>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, odit?
+                                <img src="{{asset('assets/img/'.$detail->img_url)}}" alt="Ảnh bài viết"
+                                     class="img-fluid">
+                                <figcaption>{{$detail->describe_img}}
                                 </figcaption>
                             </figure>
-                            <p>Sunt reprehenderit, hic vel optio odit est dolore, distinctio iure itaque enim pariatur
-                                ducimus. Rerum soluta, perspiciatis voluptatum cupiditate praesentium repellendus quas
-                                expedita exercitationem tempora aliquam quaerat in eligendi adipisci harum non omnis
-                                reprehenderit quidem beatae modi. Ea fugiat enim libero, ipsam dicta explicabo nihil,
-                                tempore, nulla repellendus eos necessitatibus eligendi corporis cum? Eaque harum,
-                                eligendi itaque numquam aliquam soluta.</p>
-                            <p>Explicabo perspiciatis, laborum provident voluptates illum in nulla consectetur atque
-                                quaerat excepturi quisquam, veniam velit ex pariatur quos consequuntur? Excepturi
-                                reiciendis perferendis, cupiditate dolorem eos illum amet. Beatae voluptates nemo esse
-                                ratione voluptate, nesciunt fugit magnam veritatis voluptas dignissimos doloribus
-                                maiores? Aliquam, dolores natus exercitationem corrupti blanditiis, consequuntur nihil
-                                nobis sed voluptatibus maiores sunt, illo provident aliquid laborum. Vitae, ut.</p>
-                            <p>Reprehenderit aut sed doloribus blanditiis, aspernatur magni? In molestias rem, similique
-                                ut esse repudiandae quod recusandae dolores neque earum omnis at, suscipit fuga? Minima
-                                qui veniam deserunt quisquam error amet at ratione nesciunt porro quis placeat
-                                repudiandae voluptatibus officiis fuga necessitatibus, expedita officia adipisci eaque
-                                labore accusamus? Nesciunt repellat illo exercitationem facilis similique quaerat, quis
-                                sequi? Praesentium nulla ipsam dolor.</p>
-                            <p>Dolorum, incidunt! Adipisci harum itaque maxime dolores doloremque porro eligendi quis,
-                                doloribus vel sit rerum sunt obcaecati nam suscipit nulla vitae alias blanditiis aliquam
-                                debitis atque illo modi et placeat. Ratione iure eveniet provident. Culpa laboriosam sed
-                                ad quia. Corrupti, earum, perferendis dolore cupiditate sint nihil maiores iusto tempora
-                                nobis porro itaque est. Ut laborum culpa assumenda pariatur et perferendis?</p>
-                            <p>Est soluta veritatis laboriosam, consequuntur temporibus asperiores, fugit id a ullam
-                                sed, expedita sequi doloribus fugiat. Odio et necessitatibus enim nam, iste
-                                reprehenderit cupiditate omnis ut iure aliquid obcaecati, repellendus nemo provident
-                                eveniet tempora minus! Voluptates aut laboriosam, maiores nihil accusantium, a dolorum
-                                quaerat tenetur illo eum culpa cum laudantium sunt doloremque modi possimus magni?
-                                Perferendis cum repudiandae corrupti porro.</p>
-                            <figure class="my-4">
-                                <img src="assets/img/post-landscape-5.jpg" alt="" class="img-fluid">
-                                <figcaption>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, odit?
-                                </figcaption>
-                            </figure>
-                            <p>Quis molestiae, dolorem consequuntur labore perferendis enim accusantium commodi optio,
-                                sequi magnam ad consectetur iste omnis! Voluptatibus, quia officia esse necessitatibus
-                                magnam tempore reprehenderit quo aspernatur! Assumenda, minus dolorem repellendus
-                                corporis corrupti quia temporibus repudiandae in. Sit rem aut, consectetur repudiandae
-                                perferendis nemo alias, iure ipsam omnis quam soluta, nobis animi quis aliquam
-                                blanditiis at. Dicta nemo vero sequi exercitationem.</p>
-                            <p>Architecto ex id at illum aperiam corporis, quidem magnam doloribus non eligendi delectus
-                                laborum porro molestiae beatae eveniet dolor odit optio soluta dolores! Eaque odit a
-                                nihil recusandae, error repellendus debitis ex autem ab commodi, maiores officiis
-                                doloribus provident optio, architecto assumenda! Nihil cum laboriosam eos dolore aliquid
-                                perferendis amet doloremque quibusdam odio soluta vero odit, ipsa, quisquam quod
-                                nulla.</p>
-                            <p>Consequuntur corrupti fugiat quod! Ducimus sequi nemo illo ad necessitatibus amet nobis
-                                corporis et quasi. Optio cum neque fuga. Ad excepturi magnam quisquam ex voluptatibus
-                                vitae aut nam quidem doloribus, architecto perspiciatis sit consequatur pariatur alias
-                                animi expedita quas? Et doloribus voluptatibus perferendis qui fugiat voluptatum autem
-                                facere aspernatur quidem quae assumenda iste, sit similique, necessitatibus laborum
-                                magni. Ea, dolores!</p>
-                            <p>Possimus temporibus rerum illo quia repudiandae provident sed quas atque. Ipsam adipisci
-                                accusamus iste optio illo aliquam molestias? Voluptatibus, veniam recusandae facilis
-                                nobis perspiciatis rem similique, nisi ad explicabo ipsa voluptatum, inventore molestiae
-                                natus adipisci? Fuga delectus quia assumenda totam aspernatur. Nobis hic ea rem, quaerat
-                                voluptate vero illum laboriosam omnis aspernatur labore, natus ex iusto ducimus
-                                exercitationem a officia.</p>
+                            <p><?php
+                               $cut = substr($detail->content, 0, strpos($detail->content, "\n"));
+                               echo str_replace($cut, substr($detail->content, 0, -strlen($detail->content)), nl2br($detail->content));
+                               ?></p>
                         </div><!-- End Single Post Content -->
 
                         <!-- ======= Comments ======= -->
                         <div class="comments">
                             <h5 class="comment-title py-4">Bình luận (2)</h5>
-                            <div class="comment d-flex mb-4">
-                                <div class="flex-shrink-0">
-                                    <div class="avatar avatar-sm rounded-circle">
-                                        <img class="avatar-img" src="assets/img/person-5.jpg" alt="" class="img-fluid">
-                                    </div>
-                                </div>
-                                <div class="flex-grow-1 ms-2 ms-sm-3">
-                                    <div class="comment-meta d-flex align-items-baseline">
-                                        <h6 class="me-2">Jordan Singer</h6>
-                                        <span class="text-muted">2d</span>
-                                    </div>
-                                    <div class="comment-body">
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non minima ipsum at
-                                        amet doloremque qui magni, placeat deserunt pariatur itaque laudantium impedit
-                                        aliquam eligendi repellendus excepturi quibusdam nobis esse accusantium.
-                                    </div>
-
-                                    <div class="comment-replies bg-light p-3 mt-3 rounded">
-                                        <h6 class="comment-replies-title mb-4 text-muted text-uppercase">2 replies</h6>
-
-                                        <div class="reply d-flex mb-4">
-                                            <div class="flex-shrink-0">
-                                                <div class="avatar avatar-sm rounded-circle">
-                                                    <img class="avatar-img" src="assets/img/person-4.jpg" alt=""
-                                                         class="img-fluid">
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1 ms-2 ms-sm-3">
-                                                <div class="reply-meta d-flex align-items-baseline">
-                                                    <h6 class="mb-0 me-2">Brandon Smith</h6>
-                                                    <span class="text-muted">2d</span>
-                                                </div>
-                                                <div class="reply-body">
-                                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                                </div>
-                                            </div>
+                            @foreach($cmt as $items)
+                                <div class="comment d-flex mb-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="avatar avatar-sm rounded-circle">
+                                            <img class="avatar-img" src="{{asset('assets/img/'.$items->users->avatar)}}"
+                                                 alt="Avatar comment" class="img-fluid">
                                         </div>
-                                        <div class="reply d-flex">
-                                            <div class="flex-shrink-0">
-                                                <div class="avatar avatar-sm rounded-circle">
-                                                    <img class="avatar-img" src="assets/img/person-3.jpg" alt=""
-                                                         class="img-fluid">
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1 ms-2 ms-sm-3">
-                                                <div class="reply-meta d-flex align-items-baseline">
-                                                    <h6 class="mb-0 me-2">James Parsons</h6>
-                                                    <span class="text-muted">1d</span>
-                                                </div>
-                                                <div class="reply-body">
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio
-                                                    dolore sed eos sapiente, praesentium.
-                                                </div>
-                                            </div>
+                                    </div>
+
+                                    <div class="flex-grow-1 ms-2 ms-sm-3">
+                                        <div class="comment-meta d-flex align-items-baseline">
+                                            <h6 class="me-2">{{$items->users->fullname}}</h6>
+                                            <span class="text-muted">{{$items->created_at}}</span>
+                                        </div>
+                                        <div class="comment-body">
+                                            {{$items->content}}
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="comment d-flex">
-                                <div class="flex-shrink-0">
-                                    <div class="avatar avatar-sm rounded-circle">
-                                        <img class="avatar-img" src="assets/img/person-2.jpg" alt="" class="img-fluid">
-                                    </div>
-                                </div>
-                                <div class="flex-shrink-1 ms-2 ms-sm-3">
-                                    <div class="comment-meta d-flex">
-                                        <h6 class="me-2">Santiago Roberts</h6>
-                                        <span class="text-muted">4d</span>
-                                    </div>
-                                    <div class="comment-body">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto laborum in
-                                        corrupti dolorum, quas delectus nobis porro accusantium molestias sequi.
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div><!-- End Comments -->
 
                         <!-- ======= Comments Form ======= -->
-                        <div class="row justify-content-center mt-5">
-
-                            <div class="col-lg-12">
-                                <h5 class="comment-title">Để lại Bình luận</h5>
-                                <div class="row">
-                                    <div class="col-12 mb-3">
-                                        <label for="comment-message">Nội dung</label>
-
-                                        <textarea class="form-control" id="comment-message"
-                                                  placeholder="Enter your name" cols="30" rows="10"></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <input type="submit" class="btn btn-primary" value="Đăng bình luận">
+                        <form method="POST">
+                            <div class="row justify-content-center mt-5">
+                                <div class="col-lg-12">
+                                    <h5 class="comment-title">Để lại Bình luận</h5>
+                                    <div class="row">
+                                        <div class="col-12 mb-3">
+                                        <textarea name="content_cmt" class="form-control" id="comment-message"
+                                                  placeholder="Nhập nội dung bình luận" cols="30" rows="3"></textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <input type="submit" class="btn btn-primary" value="Đăng bình luận">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div><!-- End Comments Form -->
-
+                            </div><!-- End Comments Form -->
+                            <?php echo csrf_field(); ?>
+                        </form>
                     </div>
 
                     <!-- ======= Sidebar ======= -->
                     <div class="col-lg-3 border-start custom-border">
                         <h2 class="">Bài viết liên quan</h2>
                         <div class="post-entry-1">
-                            <a href="single-post.html"><img src="assets/img/post-landscape-3.jpg" alt=""
-                                                            class="img-fluid"></a>
-                            <div class="post-meta"><span class="date">Business</span> <span class="mx-1">&bullet;</span>
-                                <span>Jul 5th '22</span></div>
-                            <h2><a href="single-post.html">6 Easy Steps To Create Your Own Cute Merch For Instagram</a>
-                            </h2>
+                            @foreach($idCat as $cat)
+                                <a href="{{route('detail', ['id'=>$cat->id])}}"><img
+                                        src="{{asset('assets/img/'.$cat->img_url)}}" alt="Ảnh bài viết"
+                                        class="img-fluid"></a>
+                                <div class="post-meta"><span class="date">{{$idCategories->name}}</span> <span
+                                        class="mx-1">&bullet;</span>
+                                    <span>{{$cat->created_at}}</span></div>
+                                <h2><a href="single-post.html">{{$cat->title}}</a>
+                                </h2>
+                            @endforeach
                         </div>
-                        <div class="post-entry-1">
-                            <a href="single-post.html"><img src="assets/img/post-landscape-6.jpg" alt=""
-                                                            class="img-fluid"></a>
-                            <div class="post-meta"><span class="date">Tech</span> <span class="mx-1">&bullet;</span>
-                                <span>Mar 1st '22</span></div>
-                            <h2><a href="single-post.html">10 Life-Changing Hacks Every Working Mom Should Know</a></h2>
-                        </div>
-                        <div class="post-entry-1">
-                            <a href="single-post.html"><img src="assets/img/post-landscape-8.jpg" alt=""
-                                                            class="img-fluid"></a>
-                            <div class="post-meta"><span class="date">Travel</span> <span class="mx-1">&bullet;</span>
-                                <span>Jul 5th '22</span></div>
-                            <h2><a href="single-post.html">5 Great Startup Tips for Female Founders</a></h2>
-                        </div>
-
-
-                        <div class="aside-block">
-                            <h3 class="aside-title">Danh mục bài viết</h3>
-                            <ul class="aside-links list-unstyled">
-                                <li><a href="#"><i class="bi bi-chevron-right"></i> Xã hội</a></li>
-                                <li><a href="#"><i class="bi bi-chevron-right"></i> Thể thao</a></li>
-                                <li><a href="#"><i class="bi bi-chevron-right"></i> Thực phẩm</a></li>
-                                <li><a href="#"><i class="bi bi-chevron-right"></i> Chính trị</a></li>
-                                <li><a href="#"><i class="bi bi-chevron-right"></i> Nghệ thuật</a></li>
-                                <li><a href="#"><i class="bi bi-chevron-right"></i> Du lịch</a></li>
-                            </ul>
-                        </div><!-- End Categories -->
-
-                        <div class="aside-block">
-                            <h3 class="aside-title">Thể loại</h3>
-                            <ul class="aside-tags list-unstyled">
-                                <li><a href="#">Xã hội</a></li>
-                                <li><a href="#">Thể thao</a></li>
-                                <li><a href="#">Thực phẩm</a></li>
-                                <li><a href="#">Chính trị</a></li>
-                                <li><a href="#">Nghệ thuật</a></li>
-                                <li><a href="#">Du lịch</a></li>
-                            </ul>
-                        </div><!-- End Tags -->
                     </div>
 
                 </div>

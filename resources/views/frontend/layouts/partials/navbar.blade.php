@@ -9,8 +9,8 @@
         <meta content="" name="keywords">
 
         <!-- Favicons -->
-        <link href="assets/img/favicon.png" rel="icon">
-        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+        <link href="/assets/img/favicon.png" rel="icon">
+        <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,15 +20,15 @@
             rel="stylesheet">
 
         <!-- Vendor CSS Files -->
-        <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-        <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-        <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-        <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+        <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+        <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+        <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+        <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
 
         <!-- Template Main CSS Files -->
-        <link href="assets/css/variables.css" rel="stylesheet">
-        <link href="assets/css/main.css" rel="stylesheet">
+        <link href="/assets/css/variables.css" rel="stylesheet">
+        <link href="/assets/css/main.css" rel="stylesheet">
         @yield('blog-css')
     </head>
 <body>
@@ -42,19 +42,16 @@
             </a>
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a href="index.html">Trang chủ</a></li>
-                    <li class="dropdown"><a href="category.html"><span>Danh mục bài viết</span> <i
+                    <li><a href="{{route('home')}}">Trang chủ</a></li>
+                    <li class="dropdown"><a><span>Danh mục bài viết</span> <i
                                 class="bi bi-chevron-down dropdown-indicator"></i></a>
                         <ul>
-                            <li><a href="#">Xã hội</a></li>
-                            <li><a href="#">Thể thao</a></li>
-                            <li><a href="#">Thực phẩm</a></li>
-                            <li><a href="#">Chính trị</a></li>
-                            <li><a href="#">Nghệ thuật</a></li>
-                            <li><a href="#">Du lịch</a></li>
+{{--                            <li><a href="@yield('nav-cat-id')">@yield('nav-cat-name')</a></li>--}}
+                            @yield('nav-cat')
                         </ul>
                     </li>
-                    <li><a href="single-post.html">Đăng xuất</a></li>
+                    <li><a href="@yield('posts-add')">Tạo bài viết</a></li>
+                    <li><a href="">Đăng xuất</a></li>
                 </ul>
             </nav>
             <div class="position-relative">

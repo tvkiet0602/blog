@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use app\Http\Controllers\Frontend\UsersController;
+use App\Http\Controllers\Frontend\UsersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,8 +14,12 @@ use app\Http\Controllers\Frontend\UsersController;
 */
 
 Route::prefix('/')->group(function (){
-    Route::get('/home', function () {
-        return view('frontend.homePage', [UsersController::class, 'home']);
-    });
+    Route::get('/home', [UsersController::class, 'home'])->name('home');
+
+    Route::match(['get', 'post'], '/detail/{id}', [UsersController::class, 'detailPosts'])->name('detail');
+//    Route::post('/detail/{id}', [UsersController::class, 'detailPosts'])->name('comment');
+    Route::match(['post', 'get'], '/add/{id}', [UsersController::class, 'addPosts'])->name('add-posts');
+
+    Route::match(['post', 'get'], '/list/{id}', [UsersController::class, 'listPage'])->name('list-page');
 });
 
