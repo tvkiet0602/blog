@@ -3,6 +3,7 @@
 namespace app\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comments;
 use App\Models\Posts;
 use App\Models\Categories;
 use App\Models\User;
@@ -20,11 +21,22 @@ class UsersController extends Controller
         }
     }
 
-    public function detailPosts($id){
+    public function detailPosts(Request $request, $id){
         $detail = Posts::find($id);
         $idCategories = $detail->categories;
+        $cmt = Comments::all();
         $idCat = Posts::where('categories_id', $idCategories->id)->where('id','!=', $id)->orderByDesc('created_at')->take(5)->get();
-        return view('frontend.detail', compact( 'detail', 'idCat', 'idCategories'));
+        if($request->method() == 'GET'){
+            return view('frontend.detail', compact( 'detail', 'idCat', 'idCategories', 'cmt'));
+        }else{
+            $cmt = [
+                'content' => $request->content_cmt,
+                'post_id' => $id,
+                'user_id'=> 1
+            ];
+            Comments::create($cmt);
+            return redirect()->route('detail', ['id' => $detail]);
+        }
     }
 
     public function addPosts(Request $request, $id){
@@ -54,7 +66,7 @@ class UsersController extends Controller
         $posts = Posts::with('categories')->where('categories_id', $id)->orderByDesc('created_at')->simplePaginate(10);
         $idCat = Categories::all();
             return view('frontend.listPage', compact('posts', 'categories', 'idCat'));
-
-
     }
+
+
 }
