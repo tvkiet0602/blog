@@ -28,6 +28,7 @@
                             </div>
                                 <div class="form-group">
                                     <select name="categories_id" class="form-control">
+                                        <option value="">Thể loại bài viết</option>
                                         @foreach($categories as $category)
                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                         @endforeach
