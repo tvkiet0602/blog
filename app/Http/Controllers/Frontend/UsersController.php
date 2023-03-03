@@ -21,7 +21,7 @@ class UsersController extends Controller
     public function detailPosts($id){
         $detail = Posts::find($id);
         $idCategories = $detail->categories;
-        $idCat = Posts::where('categories_id', $idCategories->id)->where('id','!=', $id)->orderByDesc('post_date')->take(5)->get();
+        $idCat = Posts::where('categories_id', $idCategories->id)->where('id','!=', $id)->orderByDesc('created_at')->take(5)->get();
         return view('frontend.detail', compact( 'detail', 'idCat', 'idCategories'));
     }
 

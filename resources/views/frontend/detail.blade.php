@@ -13,7 +13,7 @@
                         <div class="single-post">
                             <div class="post-meta"><span class="date"></span>{{$detail->categories->name}}<span
                                     class="mx-1">&bullet;</span>
-                                <span>{{$detail->post_date}}</span>
+                                <span>{{$detail->created_at}}</span>
                                 <span class="mx-1">&bullet;</span>
                                 {{$detail->users->fullname}}</span>
                             </div>
@@ -145,7 +145,7 @@
                             <a href="{{route('detail', ['id'=>$cat->id])}}"><img src="{{asset('assets/img/'.$cat->img_url)}}" alt="Ảnh bài viết"
                                                             class="img-fluid"></a>
                             <div class="post-meta"><span class="date">{{$idCategories->name}}</span> <span class="mx-1">&bullet;</span>
-                                <span>{{$cat->post_date}}</span></div>
+                                <span>{{$cat->created_at}}</span></div>
                             <h2><a href="single-post.html">{{$cat->title}}</a>
                             </h2>
                             @endforeach

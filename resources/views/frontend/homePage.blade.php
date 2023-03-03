@@ -48,13 +48,13 @@
                             @foreach($posts as $items)
                                 <div class="col-lg-4 border-start custom-border">
                                     <div class="post-entry-1">
-                                        <a href="{{route('detail', ['id' => $post->id])}}"><img src="{{asset('assets/img/'.$items->img_url)}}"
+                                        <a href="{{route('detail', ['id' => $items->id])}}"><img src="{{asset('assets/img/'.$items->img_url)}}"
                                                                         alt="loi"
                                                                         class="img-fluid"></a>
                                         <div class="post-meta"><span class="date">{{$items->categories->name}}</span>
                                             <span
                                                 class="mx-1">&bullet;</span> <span>{{$items->created_at}}</span></div>
-                                        <h2><a href="{{route('detail', ['id' => $post->id])}}">{{$items->title}}</a></h2>
+                                        <h2><a href="{{route('detail', ['id' => $items->id])}}">{{$items->title}}</a></h2>
                                     </div>
                                 </div>
                             @endforeach
