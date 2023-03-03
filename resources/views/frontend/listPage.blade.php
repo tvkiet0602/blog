@@ -16,9 +16,6 @@
                 <div class="row">
 
                     <div class="col-md-9" data-aos="fade-up">
-
-
-
                             <h3 class="category-title">Danh mục: {{$categories->name}}</h3>
                         @foreach ($posts as $post)
                             <div class="d-md-flex post-entry-2 half">
@@ -32,14 +29,14 @@
                                     <h3><a href="single-post.html">{{$post->title}}</a></h3>
                                     <p>
                                         @if(strlen($post->content) > 200)
-                                            <?php echo mb_substr($post->content, 0, 200, "UTF-8") . "..."; ?>
+                                            <?php echo mb_substr($post->content, 0, 300, "UTF-8") ."...."; ?>
                                         @endif
                                     </p>
                                     <div class="d-flex align-items-center author">
-                                        <div class="photo"><img src="{{asset('assets/img/').$post->users->avatar}}"
-                                                                alt="" class="img-fluid"></div>
+                                        <div class="photo"><img src="{{asset('assets/img/'.$post->users->avatar)}}"
+                                                                alt="Avatar"></div>
                                         <div class="name">
-                                            <h3 class="m-0 p-0">{{$post->users->name}}</h3>
+                                            <h3 class="m-0 p-0">{{$post->users->fullname}}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -54,24 +51,18 @@
                         <div class="aside-block">
                             <h3 class="aside-title">Danh mục bài viết</h3>
                             <ul class="aside-links list-unstyled">
-                                <li><a href="#"><i class="bi bi-chevron-right"></i> Xã hội</a></li>
-                                <li><a href="#"><i class="bi bi-chevron-right"></i> Thể thao</a></li>
-                                <li><a href="#"><i class="bi bi-chevron-right"></i> Thực phẩm</a></li>
-                                <li><a href="#"><i class="bi bi-chevron-right"></i> Chính trị</a></li>
-                                <li><a href="#"><i class="bi bi-chevron-right"></i> Nghệ thuật</a></li>
-                                <li><a href="#"><i class="bi bi-chevron-right"></i> Du lịch</a></li>
+                                @foreach($idCat as $cat)
+                                <li><a href="{{route('list-page', ['id'=>$cat->id])}}"><i class="bi bi-chevron-right"></i>{{$cat->name}}</a></li>
+                                @endforeach
                             </ul>
                         </div><!-- End Categories -->
 
                         <div class="aside-block">
                             <h3 class="aside-title">Thể loại</h3>
                             <ul class="aside-tags list-unstyled">
-                                <li><a href="#">Xã hội</a></li>
-                                <li><a href="#">Thể thao</a></li>
-                                <li><a href="#">Thực phẩm</a></li>
-                                <li><a href="#">Chính trị</a></li>
-                                <li><a href="#">Nghệ thuật</a></li>
-                                <li><a href="#">Du lịch</a></li>
+                                @foreach($idCat as $cat)
+                                    <li><a href="{{route('list-page', ['id'=>$cat->id])}}">{{$cat->name}}</a></li>
+                                @endforeach
                             </ul>
                         </div><!-- End Tags -->
 

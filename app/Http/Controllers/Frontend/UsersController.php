@@ -50,8 +50,8 @@ class UsersController extends Controller
     public function listPage($id){
         $categories = Categories::find($id);
         $posts = Posts::with('categories')->where('categories_id', $id)->orderByDesc('created_at')->simplePaginate(10);
-
-            return view('frontend.listPage', compact('posts', 'categories'));
+        $idCat = Categories::all();
+            return view('frontend.listPage', compact('posts', 'categories', 'idCat'));
 
 
     }
