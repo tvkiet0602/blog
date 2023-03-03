@@ -19,5 +19,7 @@ Route::prefix('/')->group(function (){
     Route::get('/detail/{id}', [UsersController::class, 'detailPosts'])->name('detail');
 
     Route::match(['post', 'get'], '/add/{id}', [UsersController::class, 'addPosts'])->name('add-posts');
+
+    Route::match(['post', 'get'], '/list/{id}', [UsersController::class, 'listPage'])->name('list-page');
 });
 
