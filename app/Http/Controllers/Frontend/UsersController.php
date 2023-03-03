@@ -12,7 +12,7 @@ class UsersController extends Controller
 {
     public function home()
     {
-        $posts = Posts::orderByDesc('post_date')->simplePaginate(9);
+        $posts = Posts::orderByDesc('created_at')->simplePaginate(9);
         foreach ($posts as $post){
             return view('frontend.homePage', compact('posts', 'post'));
         }
@@ -26,20 +26,24 @@ class UsersController extends Controller
     }
 
     public function addPosts(Request $request, $id){
-        $user_id = User::find($id);
-        if ($request->method() == 'GET') {
-            return view('frontend.addPosts');
-        }else{
-            $add = Posts::create([
+        $user_id = Posts::with('users')->find($id);
+        $categories = Categories::all();
+        if ($request->method() == 'POST') {
+            $file = $request->file('img_url');
+            $filename = date('YmdHi') . $file->getClientOriginalName();
+            $file->move(public_path('assets/img'), $filename);
+            $add = [
                 'title' => $request->title,
-                'content' => $request->content,
-                'img_url' => $request->img_url,
+                'content' => $request->contents,
+                'img_url' => $filename,
                 'describe_img' => $request->describe_img,
-                'post_date' => $request->post_date,
-                'categories_id' => $request->categories->id,
-                'user_id'=> $request->users->id
-            ]);
-            return redirect()->route('frontend.homePage');
+                'categories_id' => $request->categories_id,
+                'user_id'=> $user_id->user_id
+            ];
+            Posts::create($add);
+            return redirect()->route('home');
+        }else{
+            return view('frontend.addPosts', compact('user_id', 'categories'));
         }
     }
 }

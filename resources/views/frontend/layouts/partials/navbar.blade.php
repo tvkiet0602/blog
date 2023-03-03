@@ -42,7 +42,7 @@
             </a>
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="@yield('home')">Trang chủ</a></li>
                     <li class="dropdown"><a href="category.html"><span>Danh mục bài viết</span> <i
                                 class="bi bi-chevron-down dropdown-indicator"></i></a>
                         <ul>
@@ -54,8 +54,8 @@
                             <li><a href="#">Du lịch</a></li>
                         </ul>
                     </li>
-                    <li><a href="">Tạo bài viết</a></li>
-                    <li><a href="single-post.html">Đăng xuất</a></li>
+                    <li><a href="@yield('posts-add')">Tạo bài viết</a></li>
+                    <li><a href="@yield('logout')">Đăng xuất</a></li>
                 </ul>
             </nav>
             <div class="position-relative">

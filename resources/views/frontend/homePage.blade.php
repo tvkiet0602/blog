@@ -2,6 +2,13 @@
 @section('title')
     HomePage
 @endsection
+@section('posts-add')
+    {{route('add-posts', ['id' => 1])}}
+@endsection
+@section('logout') @endsection
+@section('home')
+    {{route('home')}}
+@endsection
 @section('main')
     <main id="main">
         <!-- ======= Post Grid Section ======= -->
@@ -12,11 +19,11 @@
                     <div class="col-lg-4">
                         <div class="post-entry-1 lg">
                             <h2>Bài viết mới nhất</h2>
-                            <a href=""><img src="{{asset('assets/img/'.$post->img_url)}}" alt="Ảnh bài viết mới nhất"
+                            <a href="{{route('detail', ['id' => $post->id])}}"><img src="{{asset('assets/img/'.$post->img_url)}}" alt="Ảnh bài viết mới nhất"
                                                             class="img-fluid"></a>
                             <div class="post-meta"><span class="date">{{$post->categories->name}}</span> <span
                                     class="mx-1">&bullet;</span> <span>{{$post->post_date}}</span></div>
-                            <h3><a href="single-post.html">{{$post->title}}</a></h3>
+                            <h3><a href="{{route('detail', ['id' => $post->id])}}">{{$post->title}}</a></h3>
                             <p class="mb-4 d-block">
                                 @if(strlen($post->content) > 700)
                                     {{substr($post->content, 0, 700) . "..."}}
@@ -41,13 +48,13 @@
                             @foreach($posts as $items)
                                 <div class="col-lg-4 border-start custom-border">
                                     <div class="post-entry-1">
-                                        <a href="single-post.html"><img src="{{asset('assets/img/'.$items->img_url)}}"
+                                        <a href="{{route('detail', ['id' => $post->id])}}"><img src="{{asset('assets/img/'.$items->img_url)}}"
                                                                         alt="loi"
                                                                         class="img-fluid"></a>
                                         <div class="post-meta"><span class="date">{{$items->categories->name}}</span>
                                             <span
-                                                class="mx-1">&bullet;</span> <span>{{$items->post_date}}</span></div>
-                                        <h2><a href="single-post.html">{{$items->title}}</a></h2>
+                                                class="mx-1">&bullet;</span> <span>{{$items->created_at}}</span></div>
+                                        <h2><a href="{{route('detail', ['id' => $post->id])}}">{{$items->title}}</a></h2>
                                     </div>
                                 </div>
                             @endforeach

@@ -2,6 +2,13 @@
 @section('title')
     Create a blog
 @endsection
+@section('posts-add')
+    {{route('add-posts', ['id' => 1])}}
+@endsection
+@section('logout') @endsection
+@section('home')
+    {{route('home')}}
+@endsection
 @section('main')
     <main id="main">
         <section id="contact" class="contact mb-5">
@@ -11,14 +18,24 @@
                 </div>
 
                 <div class="form mt-5">
-                    <form method="post" role="form" class="php-email-form" enctype="multipart/form-data">
+
+                    <form action="{{route('add-posts', ['id' => $user_id])}}" method="post" role="form"
+                          class="php-email-form" enctype="multipart/form-data">
                         <div class="row">
                             <div class="form-group">
                                 <input type="text" name="title" class="form-control" id="title"
                                        placeholder="Tiêu đề bài viết" required>
                             </div>
+                                <div class="form-group">
+                                    <select name="categories_id" class="form-control">
+                                        @foreach($categories as $category)
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
                             <div class="form-group">
-                                <textarea class="form-control" name="content" rows="5" placeholder="Nội dung bài viết"
+                                <textarea class="form-control" name="contents" rows="5" placeholder="Nội dung bài viết"
                                           required></textarea>
                             </div>
                             <div class="my-3">
@@ -34,14 +51,12 @@
                                 <input type="text" name="describe_img" class="form-control" id="describe_img"
                                        placeholder="Mô tả cho hình ảnh" required>
                             </div>
-                            <div class="form-group">
-                                <input type="hidden" name="post_date" class="form-control" id="post_date">
-                            </div>
                         </div>
 
                         <div class="text-center">
                             <button type="submit">Đăng bài</button>
                         </div>
+                        <?php echo csrf_field(); ?>
                     </form>
                 </div><!-- End Contact Form -->
             </div>

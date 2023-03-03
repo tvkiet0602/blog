@@ -8,9 +8,9 @@ class Posts extends Model
 {
     use HasFactory;
     protected $table = 'posts';
-    public $timestamps = false;
+    public $timestamps = true;
 
-    protected $fillable = ['title', 'content', 'img_url', 'categories_id', 'user_id', 'post_date'];
+    protected $fillable = ['title', 'content', 'img_url', 'categories_id', 'user_id'];
     public function categories(){
         return $this->belongsTo(Categories::class, 'categories_id', 'id');
     }
