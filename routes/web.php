@@ -22,4 +22,3 @@ Route::prefix('/')->group(function (){
 
     Route::match(['post', 'get'], '/list/{id}', [UsersController::class, 'listPage'])->name('list-page');
 });
-
