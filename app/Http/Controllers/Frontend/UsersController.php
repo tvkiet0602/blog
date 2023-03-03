@@ -13,8 +13,10 @@ class UsersController extends Controller
     public function home()
     {
         $posts = Posts::orderByDesc('created_at')->simplePaginate(9);
+        $idCat = Categories::all();
+//        $idUser = User::all();
         foreach ($posts as $post){
-            return view('frontend.homePage', compact('posts', 'post'));
+            return view('frontend.homePage', compact('posts', 'post', 'idCat'));
         }
     }
 

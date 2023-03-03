@@ -5,10 +5,12 @@
 @section('posts-add')
     {{route('add-posts', ['id' => 1])}}
 @endsection
-@section('logout') @endsection
-@section('home')
-    {{route('home')}}
+@section('nav-cat')
+    @foreach($idCat as $items)
+        <li><a href="{{route('list-page', ['id' => $items->id])}}">{{$items->name }}</a></li>
+    @endforeach
 @endsection
+
 @section('main')
     <main id="main">
         <!-- ======= Post Grid Section ======= -->
@@ -19,8 +21,9 @@
                     <div class="col-lg-4">
                         <div class="post-entry-1 lg">
                             <h2>Bài viết mới nhất</h2>
-                            <a href="{{route('detail', ['id' => $post->id])}}"><img src="{{asset('assets/img/'.$post->img_url)}}" alt="Ảnh bài viết mới nhất"
-                                                            class="img-fluid"></a>
+                            <a href="{{route('detail', ['id' => $post->id])}}"><img
+                                    src="{{asset('assets/img/'.$post->img_url)}}" alt="Ảnh bài viết mới nhất"
+                                    class="img-fluid"></a>
                             <div class="post-meta"><span class="date">{{$post->categories->name}}</span> <span
                                     class="mx-1">&bullet;</span> <span>{{$post->post_date}}</span></div>
                             <h3><a href="{{route('detail', ['id' => $post->id])}}">{{$post->title}}</a></h3>
@@ -48,13 +51,15 @@
                             @foreach($posts as $items)
                                 <div class="col-lg-4 border-start custom-border">
                                     <div class="post-entry-1">
-                                        <a href="{{route('detail', ['id' => $items->id])}}"><img src="{{asset('assets/img/'.$items->img_url)}}"
-                                                                        alt="loi"
-                                                                        class="img-fluid"></a>
+                                        <a href="{{route('detail', ['id' => $items->id])}}"><img
+                                                src="{{asset('assets/img/'.$items->img_url)}}"
+                                                alt="loi"
+                                                class="img-fluid"></a>
                                         <div class="post-meta"><span class="date">{{$items->categories->name}}</span>
                                             <span
                                                 class="mx-1">&bullet;</span> <span>{{$items->created_at}}</span></div>
-                                        <h2><a href="{{route('detail', ['id' => $items->id])}}">{{$items->title}}</a></h2>
+                                        <h2><a href="{{route('detail', ['id' => $items->id])}}">{{$items->title}}</a>
+                                        </h2>
                                     </div>
                                 </div>
                             @endforeach
@@ -67,3 +72,14 @@
         </section> <!-- End Post Grid Section -->
     </main><!-- End #main -->
 @endsection
+@section('footer-cat')
+    @foreach($idCat as $items)
+        <li><a href="{{route('list-page', ['id' => $items->id])}}"><i class="bi bi-chevron-right"></i>{{$items->name }}</a></li>
+    @endforeach
+@endsection
+{{--@section('footer-categories-id')--}}
+{{--    {{$post->categories->id}}--}}
+{{--@endsection--}}
+{{--@section('footer-categories-name')--}}
+{{--    {{$post->categories->name}}--}}
+{{--@endsection--}}
