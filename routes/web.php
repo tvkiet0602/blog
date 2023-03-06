@@ -31,8 +31,6 @@ Route::prefix('/')->group(function (){
 Route::prefix('/admin')->group(function (){
     Route::match(['get', 'post'], '/login', [AdminController::class, 'login'])->name('login');
 
-    Route::get('/', function () {
-        return view('backend.layouts.partials.menu');
-    });
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 });
 

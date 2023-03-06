@@ -31,7 +31,8 @@
     <link href="/assets/css/variables.css" rel="stylesheet">
     <link href="/assets/css/main.css" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet">
-    @yield('blog-css')
+    <link href="/assets/css/style-dashboard.css" rel="stylesheet">
+
 </head>
 <body>
 <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

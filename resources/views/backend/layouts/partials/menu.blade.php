@@ -86,9 +86,7 @@
     </nav><!-- End Icons Navigation -->
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
-
         <ul class="sidebar-nav" id="sidebar-nav">
-
             <li class="nav-item">
                 <a class="nav-link " href="index.html">
                     <i class="bi bi-grid"></i>
@@ -103,7 +101,8 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-layout-text-window-reverse"></i><span>Quản lý Article</span><i class="bi bi-chevron-down ms-auto"></i>
+                    <i class="bi bi-layout-text-window-reverse"></i><span>Quản lý Article</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
@@ -126,18 +125,19 @@
                     <i class="bi bi-layout-text-window-reverse"></i><span>Cấu hình chung</span>
                 </a>
             </li>
+        </ul>
+    </aside>
+</header>
 
 
+<!-- Vendor JS Files -->
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/assets/vendor/aos/aos.js"></script>
+<script src="/assets/vendor/php-email-form/validate.js"></script>
 
-
-                    <!-- Vendor JS Files -->
-                    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-                    <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
-                    <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
-                    <script src="/assets/vendor/aos/aos.js"></script>
-                    <script src="/assets/vendor/php-email-form/validate.js"></script>
-
-                    <!-- Template Main JS File -->
-                    <script src="/assets/js/main.js"></script>
+<!-- Template Main JS File -->
+<script src="/assets/js/main.js"></script>
 
 </body>
