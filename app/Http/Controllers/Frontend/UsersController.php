@@ -8,6 +8,7 @@ use App\Models\Posts;
 use App\Models\Categories;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -68,5 +69,23 @@ class UsersController extends Controller
             return view('frontend.listPage', compact('posts', 'categories', 'idCat'));
     }
 
+    public function register(Request $request){
+        if($request->method()=='GET'){
+            return view('frontend.register');
+        }else{
+            $dataInsert = [
+                'fullname' => $request->fullname,
+                'email' => $request->email,
+                'username' => $request->username,
+                'password' =>Hash::make($request->password),
+                'avatar' => $request->avatar
+            ];
+        User::create($dataInsert);
+        return redirect()->route('login');
+        }
+    }
 
+    public function login(){
+        return view('frontend.login');
+    }
 }
