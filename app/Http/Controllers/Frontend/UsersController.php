@@ -7,9 +7,10 @@ use App\Models\Comments;
 use App\Models\Posts;
 use App\Models\Categories;
 use App\Models\User;
+use Illuminate\Auth\Authenticatable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
 class UsersController extends Controller
 {
     public function home()
@@ -88,7 +89,26 @@ class UsersController extends Controller
         }
     }
 
-    public function login(){
-        return view('frontend.login');
+    public function login(Request $request){
+        $posts = Posts::orderByDesc('created_at')->simplePaginate(9);
+        $idCat = Categories::all();
+        if($request->method()=='GET'){
+            return view('frontend.login');
+        }else{
+            $credentials = $request->only('username', 'password');
+            if (Auth::attempt($credentials)) {
+                foreach ($posts as $post){
+                    return view('frontend.homePage', compact('posts', 'post', 'idCat'));
+                }
+            }else{
+                return "Validate!!";
+            }
+        }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
     }
 }
