@@ -24,7 +24,7 @@ class UsersController extends Controller
     public function detailPosts(Request $request, $id){
         $detail = Posts::find($id);
         $idCategories = $detail->categories;
-        $cmt = Comments::all();
+        $cmt = Comments::where('post_id', $id)->get();
         $idCat = Posts::where('categories_id', $idCategories->id)->where('id','!=', $id)->orderByDesc('created_at')->take(5)->get();
         if($request->method() == 'GET'){
             return view('frontend.detail', compact( 'detail', 'idCat', 'idCategories', 'cmt'));

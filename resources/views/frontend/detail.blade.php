@@ -2,6 +2,14 @@
 @section('title')
     HomePage
 @endsection
+@section('posts-add')
+    {{route('add-posts', ['id' => 1])}}
+@endsection
+@section('nav-cat')
+    @foreach($idCat as $items)
+        <li><a href="{{route('list-page', ['id' => $items->id])}}">{{$items->name }}</a></li>
+    @endforeach
+@endsection
 @section('main')
     <main id="main">
         <section class="single-post-content">
@@ -38,7 +46,7 @@
 
                         <!-- ======= Comments ======= -->
                         <div class="comments">
-                            <h5 class="comment-title py-4">Bình luận (2)</h5>
+                            <h5 class="comment-title py-4">Bình luận </h5>
                             @foreach($cmt as $items)
                                 <div class="comment d-flex mb-4">
                                     <div class="flex-shrink-0">
