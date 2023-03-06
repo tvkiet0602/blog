@@ -95,8 +95,8 @@ class UsersController extends Controller
         if($request->method()=='GET'){
             return view('frontend.login');
         }else{
-            $credentials = $request->only('username', 'password');
-            if (Auth::attempt($credentials)) {
+            $login = $request->only('username', 'password');
+            if (Auth::attempt($login)) {
                 foreach ($posts as $post){
                     return view('frontend.homePage', compact('posts', 'post', 'idCat'));
                 }
