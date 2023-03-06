@@ -37,15 +37,16 @@ class AdminController extends Controller
             return view('backend.editUser', compact('info'));
         }else{
             $avatar = $request->file('avatar');
-            $filename = date('YmdHi') . $avatar->getClientOriginalName();
-            $avatar->move(public_path('assets/img'), $filename);
+            $filenames = date('YmdHi') . $avatar->getClientOriginalName();
+            $avatar->move(public_path('assets/img'), $filenames);
             $data = [
               'fullname' => $request->fullname,
               'username' => $request->username,
               'email' => $request->email,
               'avatar' => $avatar
             ];
-            User::update($data);
+            dd($data);
+            User::where('id', $id)->update($data);
             return redirect()->route('user-manager');
         }
     }

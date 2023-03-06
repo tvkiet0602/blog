@@ -29,7 +29,7 @@
                                     <th scope="col">Họ và tên</th>
                                     <th scope="col">Username</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Ngày tạo</th>
+                                    <th scope="col">Thao tác gần đây</th>
                                     <th scope="col"></th>
                                 </tr>
                                 </thead>

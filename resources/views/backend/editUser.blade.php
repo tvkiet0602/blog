@@ -11,24 +11,25 @@
                 <!-- Vertical Form -->
                 <form method="POST" class="row g-3" enctype="multipart/form-data">
                     <div class="col-12">
-                        <label for="inputNanme4" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="inputNanme4" value="{{$info->username}}">
+                        <label  class="form-label">Username</label>
+                        <input type="text" name="username" class="form-control" value="{{$info->username}}">
                     </div>
                     <div class="col-12">
-                        <label for="inputEmail4" class="form-label">Họ và tên</label>
-                        <input type="text" class="form-control" id="inputEmail4" value="{{$info->fullname}}">
+                        <label class="form-label">Họ và tên</label>
+                        <input type="text" name="fullname" class="form-control" value="{{$info->fullname}}">
                     </div>
                     <div class="col-12">
-                        <label for="inputPassword4" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="inputPassword4" value="{{$info->email}}">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" value="{{$info->email}}">
                     </div>
                     <div class="col-12">
-                        <label for="inputAddress" class="form-label">Ảnh đại diện</label>
-                        <input type="file" class="form-control" id="inputAddress" placeholder="Chọn ảnh đại diện" value="{{$info->avatar}}">
+                        <label class="form-label">Ảnh đại diện hiện tại</label><br>
+                        <img src="{{asset('/assets/img/'.$info->avatar)}}" >
+                            <input type="file" name="avatar" class="form-control" value="{{asset('/assets/img/'.$info->avatar)}}">
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Lưu</button>
-                        <button type="cacel" class="btn btn-secondary">Hủy</button>
+                        <button href="{{route('user-manager')}}" class="btn btn-secondary">Hủy</button>
                     </div>
                     @csrf
                 </form><!-- Vertical Form -->
