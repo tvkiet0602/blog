@@ -60,7 +60,7 @@
                                         <p class="text-center small">Vui lòng nhập thông tin người dùng để tạo tài khoản mới</p>
                                     </div>
 
-                                    <form method="POST" class="row g-3 needs-validation" novalidate>
+                                    <form method="POST" class="row g-3 needs-validation" novalidate enctype="multipart/form-data">
                                         <div class="col-12">
                                             <label for="yourUsername" class="form-label">Username</label>
                                             <div class="input-group has-validation">
@@ -94,11 +94,8 @@
                                             <button class="btn btn-primary w-100" type="submit">Đăng ký</button>
                                         </div>
                                         <div class="col-12">
-                                            <p class="small mb-0">Bạn đã có tài khoản? <a href="pages-login.html">Đăng nhập</a></p>
+                                            <p class="small mb-0">Bạn đã có tài khoản? <a href="{{route('login')}}">Đăng nhập</a></p>
                                         </div>
-                                        <?php echo csrf_field(); ?>
-                                        <?php echo csrf_token(); ?>
-
                                         @csrf
                                     </form>
 
