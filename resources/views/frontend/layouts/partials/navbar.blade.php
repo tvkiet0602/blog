@@ -51,7 +51,7 @@
                         </ul>
                     </li>
                     <li><a href="@yield('posts-add')">Tạo bài viết</a></li>
-                    <li><a href="">Đăng xuất</a></li>
+                    <li><a href="{{route('logout')}}">Đăng xuất</a></li>
                 </ul>
             </nav>
             <div class="position-relative">
