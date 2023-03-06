@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\UsersController;
+use App\Http\Controllers\Backend\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,4 +26,10 @@ Route::prefix('/')->group(function (){
     Route::match(['post', 'get'], '/add/{id}', [UsersController::class, 'addPosts'])->name('add-posts');
 
     Route::match(['post', 'get'], '/list/{id}', [UsersController::class, 'listPage'])->name('list-page');
+});
+
+Route::prefix('/admin')->group(function (){
+    Route::match(['get', 'post'], '/login', [AdminController::class, 'login'])->name('login');
+
+
 });
