@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categories;
+use App\Models\Comments;
 use App\Models\Posts;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,43 +12,86 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function login(){
+    public function login()
+    {
         return view('backend.login');
     }
-    public function dashboard(){
+
+    public function dashboard()
+    {
         return view('backend.dashboard');
     }
-    public function managerUser(Request $request){
+
+    public function managerUser(Request $request)
+    {
         $info = User::all();
-        if($request->method() == 'GET'){
+        if ($request->method() == 'GET') {
             return view('backend.managerUser', compact('info'));
-        }else{
+        } else {
             return view('backend.managerUser');
         }
     }
 
-    public function deleteUser($id){
+    public function deleteUser($id)
+    {
         $delete = User::find($id);
         $delete->delete();
         return redirect()->route('user-manager', compact('delete'));
     }
-    public function editUser(Request $request, $id){
+
+    public function editUser(Request $request, $id)
+    {
         $info = User::find($id);
-        if($request->method() == 'GET'){
+        if ($request->method() == 'GET') {
             return view('backend.editUser', compact('info'));
-        }else{
+        } else {
             $avatar = $request->file('avatar');
             $filenames = date('YmdHi') . $avatar->getClientOriginalName();
             $avatar->move(public_path('assets/img'), $filenames);
             $data = [
-              'fullname' => $request->fullname,
-              'username' => $request->username,
-              'email' => $request->email,
-              'avatar' => $avatar
+                'fullname' => $request->fullname,
+                'username' => $request->username,
+                'email' => $request->email,
+                'avatar' => $avatar
             ];
-            dd($data);
             User::where('id', $id)->update($data);
             return redirect()->route('user-manager');
+        }
+    }
+
+    public function article(Request $request)
+    {
+        $article = Posts::orderByDesc('created_at')->simplePaginate(10);
+        if ($request->method() == 'GET') {
+            return view('backend.managerArticle', compact('article'));
+        }else{
+
+        }
+    }
+
+    public function deleteArticle($id)
+    {
+        $deleteArt = Posts::find($id);
+        $deleteArt->delete();
+        return redirect()->route('article-manager', compact('deleteArt'));
+    }
+    public function editArticle(Request $request, $id){
+        $articleEdit = Posts::find($id);
+        if ($request->method() == 'GET') {
+//            dd($articleEdit);
+            return view('backend.editArticle', compact('articleEdit'));
+        } else {
+//            $img_url = $request->file('img_url');
+//            $filenames = date('YmdHi') . $img_url->getClientOriginalName();
+//            $img_url->move(public_path('assets/img'), $filenames);
+            $updateArticle = [
+                'title' => $request->title,
+                'content' => $request->contents,
+                'describe_img' => $request->describe_img,
+//                'img_url' => $img_url
+            ];
+            Posts::where('id', $id)->update($updateArticle);
+            return redirect()->route('article-manager');
         }
     }
 }

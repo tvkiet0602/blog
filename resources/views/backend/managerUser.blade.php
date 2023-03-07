@@ -20,7 +20,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Table with stripped rows</h5>
+                            <h5 class="card-title">Bảng thông tin người dùng</h5>
 
                             <table class="table table-striped">
                                 <thead>
