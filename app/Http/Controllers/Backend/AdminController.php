@@ -22,21 +22,17 @@ class AdminController extends Controller
         return view('backend.dashboard');
     }
 
-    public function managerUser(Request $request)
+    public function managerUser()
     {
         $info = User::all();
-        if ($request->method() == 'GET') {
-            return view('backend.managerUser', compact('info'));
-        } else {
-            return view('backend.managerUser');
-        }
+        return view('backend.managerUser', compact('info'));
     }
 
     public function deleteUser($id)
     {
-        $delete = User::find($id);
-        $delete->delete();
-        return redirect()->route('user-manager', compact('delete'));
+        $del = User::find($id);
+        $del->delete();
+        return redirect()->route('user-manager');
     }
 
     public function editUser(Request $request, $id)
@@ -106,6 +102,7 @@ class AdminController extends Controller
         return view('backend.managerComment', compact('cmt', 'art'));
 
     }
+
     public function deleteCheck($id)
     {
         $deleteCmt = Comments::find($id);
