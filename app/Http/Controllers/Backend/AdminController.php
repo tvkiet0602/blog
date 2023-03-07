@@ -19,7 +19,8 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return view('backend.dashboard');
+        $admin = User::all();
+        return view('backend.dashboard', compact('admin'));
     }
 
     public function managerUser(Request $request)
@@ -98,7 +99,6 @@ class AdminController extends Controller
             return redirect()->route('article-manager');
         }
     }
-
     public function managerCmt(Request $request)
     {
         $cmt = Comments::simplePaginate(30);
@@ -112,7 +112,6 @@ class AdminController extends Controller
         $deleteCmt->delete();
         return redirect()->route('comment-manager');
     }
-
     public function updateCheck($id)
     {
         $data = [
