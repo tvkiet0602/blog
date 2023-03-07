@@ -34,6 +34,7 @@
                                     <th scope="col">Bài viết gần nhất</th>
                                     <th scope="col">Người tạo</th>
                                     <th scope="col">Thời gian tạo</th>
+                                    <th scope="col">Bình luận</th>
                                     <th scope="col"></th>
                                 </tr>
                                 </thead>
@@ -44,6 +45,7 @@
                                         <td>{{$items->title}}</td>
                                         <td>{{$items->users->fullname}}</td>
                                         <td>{{$items->created_at}}</td>
+                                        <td>{{$count}}</td>
                                         <td>
                                             <div class="dropdown">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button"

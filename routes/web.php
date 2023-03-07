@@ -40,5 +40,12 @@ Route::prefix('/admin')->group(function (){
     Route::match(['get', 'post'], '/article', [AdminController::class, 'article'] )->name('article-manager');
     Route::get('/delete/{id}', [AdminController::class, 'deleteArticle'])->name('delete-article');
     Route::match(['get', 'post'], '/editArticle/{id}', [AdminController::class, 'editArticle'] )->name('edit-article');
+
+    Route::get ('/managerCmt', [AdminController::class, 'managerCmt'] )->name('comment-manager');
+    Route::get('/deleteCheck/{id}', [AdminController::class, 'deleteCheck'] )->name('comment-check-del');
+    Route::get('/updateCheck/{id}', [AdminController::class, 'updateCheck'] )->name('comment-check-up');
+//    Route::post('/checkCmt/{id}', [AdminController::class, 'checkCmt'] )->name('comment-check');
+//    Route::post('/managerCmt', [AdminController::class, 'managerCmt'] )->name('comment-delete');
+
 });
 

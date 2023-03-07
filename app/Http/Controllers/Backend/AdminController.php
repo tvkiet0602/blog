@@ -61,10 +61,12 @@ class AdminController extends Controller
 
     public function article(Request $request)
     {
+        $cmt = Comments::all();
+        $count = Comments::all()->count();
         $article = Posts::orderByDesc('created_at')->simplePaginate(10);
         if ($request->method() == 'GET') {
-            return view('backend.managerArticle', compact('article'));
-        }else{
+            return view('backend.managerArticle', compact('article', 'cmt', 'count'));
+        } else {
 
         }
     }
@@ -75,7 +77,9 @@ class AdminController extends Controller
         $deleteArt->delete();
         return redirect()->route('article-manager', compact('deleteArt'));
     }
-    public function editArticle(Request $request, $id){
+
+    public function editArticle(Request $request, $id)
+    {
         $articleEdit = Posts::find($id);
         if ($request->method() == 'GET') {
 //            dd($articleEdit);
@@ -93,5 +97,28 @@ class AdminController extends Controller
             Posts::where('id', $id)->update($updateArticle);
             return redirect()->route('article-manager');
         }
+    }
+
+    public function managerCmt(Request $request)
+    {
+        $cmt = Comments::simplePaginate(30);
+        $art = Posts::all();
+        return view('backend.managerComment', compact('cmt', 'art'));
+
+    }
+    public function deleteCheck($id)
+    {
+        $deleteCmt = Comments::find($id);
+        $deleteCmt->delete();
+        return redirect()->route('comment-manager');
+    }
+
+    public function updateCheck($id)
+    {
+        $data = [
+            'check' => 1
+        ];
+        Comments::where('id', $id)->update($data);
+        return redirect()->route('comment-manager');
     }
 }
