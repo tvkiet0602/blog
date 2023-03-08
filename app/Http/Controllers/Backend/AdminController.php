@@ -42,7 +42,7 @@ class AdminController extends Controller
                 'email' => $request->email,
                 'username' => $request->username,
                 'password' =>Hash::make($request->password),
-                'avatar' => $avatar,
+                'avatar' => $filename,
                 'role' => 1
             ];
             User::create($dataInsert);

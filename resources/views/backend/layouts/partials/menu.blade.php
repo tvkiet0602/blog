@@ -18,9 +18,12 @@
 
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
-            <li class="nav-item dropdown pe-4">
-                <a><span>ADMIN: <b>{{auth()->user()->fullname}}</b></span></a>
+            <li class="nav-item dropdown pe-2">
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                <img src="{{asset('assets/img/'.auth()->user()->avatar)}}" alt="Profile" class="rounded-circle">
+                </a>
             </li>
+            <li class="nav-item dropdown pe-4"><a><span>ADMIN: <b>{{auth()->user()->fullname}}</b></span></a></li>
             <li class="nav-item dropdown pe-4">
                 <span><a href="{{route('logout')}}">Đăng xuất </a></span>
             </li>
