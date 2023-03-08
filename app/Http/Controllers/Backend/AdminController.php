@@ -48,7 +48,7 @@ class AdminController extends Controller
                 'fullname' => $request->fullname,
                 'username' => $request->username,
                 'email' => $request->email,
-                'avatar' => $avatar
+                'avatar' => $filenames
             ];
             User::where('id', $id)->update($data);
             return redirect()->route('user-manager');
@@ -81,14 +81,14 @@ class AdminController extends Controller
 //            dd($articleEdit);
             return view('backend.editArticle', compact('articleEdit'));
         } else {
-//            $img_url = $request->file('img_url');
-//            $filenames = date('YmdHi') . $img_url->getClientOriginalName();
-//            $img_url->move(public_path('assets/img'), $filenames);
+            $img_url = $request->file('img_url');
+            $filenames = date('YmdHi') . $img_url->getClientOriginalName();
+            $img_url->move(public_path('assets/img'), $filenames);
             $updateArticle = [
                 'title' => $request->title,
                 'content' => $request->contents,
                 'describe_img' => $request->describe_img,
-//                'img_url' => $img_url
+                'img_url' => $filenames
             ];
             Posts::where('id', $id)->update($updateArticle);
             return redirect()->route('article-manager');
