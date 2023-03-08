@@ -10,6 +10,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
@@ -59,6 +61,16 @@ class AdminController extends Controller
     {
         $info = User::all();
         return view('backend.managerUser', compact('info'));
+    }
+    public function managerPermission()
+    {
+        $info = User::all();
+//        $role = Role::create(['name' => 'Writer']);
+//        $permission = Permission::create(['name' => 'Edit Articles']);
+//        $role->givePermissionTo($permission);
+        return view('backend.managerPermission', compact('info'));
+
+
     }
 
     public function deleteUser($id)

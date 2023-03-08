@@ -28,9 +28,8 @@
                                     <th scope="col">STT</th>
                                     <th scope="col">Họ và tên</th>
                                     <th scope="col">Username</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Thao tác gần đây</th>
-                                    <th scope="col"></th>
+                                    <th scope="col">Quyền</th>
+                                    <th scope="col">Vai trò</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -39,22 +38,8 @@
                                         <th>{{$key + 1}}</th>
                                         <td>{{$items->fullname}}</td>
                                         <td>{{$items->username}}</td>
-                                        <td>{{$items->email}}</td>
-                                        <td>{{$items->created_at}}</td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Cập nhật
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="{{route('edit-user', ['id' => $items->id])}}">Chỉnh sửa</a>
-
-{{--                                                      <a onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng {{$items->fullname}}?')" class="dropdown-item" href="{{route('del-user', ['id' => $items->id])}}">Xóa</a>--}}
-{{--                                                    <a href="{{route('del_user', ['id' => $items->id])}}">Xóa</a>--}}
-
-                                                </div>
-                                            </div>
-                                        </td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
