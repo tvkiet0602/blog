@@ -32,9 +32,15 @@ Route::prefix('/admin')->group(function (){
     Route::match(['get', 'post'], '/login', [AdminController::class, 'login'])->name('login');
 
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::match(['get', 'post'], '/login', [AdminController::class, 'login'])->name('login');
+    Route::get ('/logout', [AdminController::class, 'logout'])->name('logout');
+    Route::match(['get', 'post'], '/register', [AdminController::class, 'register'])->name('register');
+
 
     Route::get( '/managerUser', [AdminController::class, 'managerUser'] )->name('user-manager');
+
     Route::match(['get', 'post'], '/delete/{id}', [AdminController::class, 'deleteUser'])->name('del-user');
+
     Route::match(['get', 'post'], '/editUser/{id}', [AdminController::class, 'editUser'] )->name('edit-user');
 
     Route::match(['get', 'post'], '/article', [AdminController::class, 'article'] )->name('article-manager');

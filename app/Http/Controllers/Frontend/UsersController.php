@@ -25,11 +25,13 @@ class UsersController extends Controller
 
     public function detailPosts(Request $request, $id){
         $detail = Posts::find($id);
+        $count = Comments::where('post_id', $id)->where('check', 1)->count();
         $idCategories = $detail->categories;
-        $cmt = Comments::where('post_id', $id)->get();
+        $cmt = Comments::all();
+        $count = Comments::where('post_id', $id)->where('check', 1)->count();
         $idCat = Posts::where('categories_id', $idCategories->id)->where('id','!=', $id)->orderByDesc('created_at')->take(5)->get();
         if($request->method() == 'GET'){
-            return view('frontend.detail', compact( 'detail', 'idCat', 'idCategories', 'cmt'));
+            return view('frontend.detail', compact( 'detail', 'idCat', 'idCategories', 'cmt', 'count'));
         }else{
             $cmt = [
                 'content' => $request->content_cmt,
@@ -76,13 +78,14 @@ class UsersController extends Controller
         }else{
             $avatar = $request->file('avatar');
             $filename = date('YmdHi') . $avatar->getClientOriginalName();
-            $avatar->move(public_path('assets/img'), $filename);
+            $avatar->move(public_path('./assets/img/'), $filename);
             $dataInsert = [
                 'fullname' => $request->fullname,
                 'email' => $request->email,
                 'username' => $request->username,
                 'password' =>Hash::make($request->password),
-                'avatar' => $avatar
+                'avatar' => $filename,
+                'role' => 0
             ];
         User::create($dataInsert);
         return redirect()->route('login');
@@ -95,14 +98,15 @@ class UsersController extends Controller
         if($request->method()=='GET'){
             return view('frontend.login');
         }else{
-            $credentials = $request->only('username', 'password');
-            if (Auth::attempt($credentials)) {
+            $login = $request->only('username', 'password');
+            if (Auth::attempt($login)) {
                 foreach ($posts as $post){
                     return view('frontend.homePage', compact('posts', 'post', 'idCat'));
                 }
             }else{
                 return "Validate!!";
             }
+            return view('frontend.homePage');
         }
     }
 

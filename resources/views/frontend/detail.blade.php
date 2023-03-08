@@ -12,6 +12,9 @@
 @endsection
 @section('main')
     <main id="main">
+        @section('breadcrumbs')
+            {{ Breadcrumbs::render('detail', $detail) }}
+        @endsection
         <section class="single-post-content">
             <div class="container">
                 <div class="row">
@@ -46,31 +49,34 @@
 
                         <!-- ======= Comments ======= -->
                         <div class="comments">
-                            <h5 class="comment-title py-4">Bình luận </h5>
+                            <h5 class="comment-title py-4">Bình luận ({{$count}})</h5>
                             @foreach($cmt as $items)
-                                <div class="comment d-flex mb-4">
-                                    <div class="flex-shrink-0">
-                                        <div class="avatar avatar-sm rounded-circle">
-                                            <img class="avatar-img" src="{{asset('assets/img/'.$items->users->avatar)}}"
-                                                 alt="Avatar comment" class="img-fluid">
+                                @if($items->check == 1)
+                                    <div class="comment d-flex mb-4">
+                                        <div class="flex-shrink-0">
+                                            <div class="avatar avatar-sm rounded-circle">
+                                                <img class="avatar-img"
+                                                     src="{{asset('assets/img/'.$items->users->avatar)}}"
+                                                     alt="Avatar comment" class="img-fluid">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="flex-grow-1 ms-2 ms-sm-3">
-                                        <div class="comment-meta d-flex align-items-baseline">
-                                            <h6 class="me-2">{{$items->users->fullname}}</h6>
-                                            <span class="text-muted">{{$items->created_at}}</span>
-                                        </div>
-                                        <div class="comment-body">
-                                            {{$items->content}}
+                                        <div class="flex-grow-1 ms-2 ms-sm-3">
+                                            <div class="comment-meta d-flex align-items-baseline">
+                                                <h6 class="me-2">{{$items->users->fullname}}</h6>
+                                                <span class="text-muted">{{$items->created_at}}</span>
+                                            </div>
+                                            <div class="comment-body">
+                                                {{$items->content}}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                             @endforeach
                         </div><!-- End Comments -->
 
                         <!-- ======= Comments Form ======= -->
-                        <form method="POST">
+                        <form method="POST" >
                             <div class="row justify-content-center mt-5">
                                 <div class="col-lg-12">
                                     <h5 class="comment-title">Để lại Bình luận</h5>
@@ -80,7 +86,7 @@
                                                   placeholder="Nhập nội dung bình luận" cols="30" rows="3"></textarea>
                                         </div>
                                         <div class="col-12">
-                                            <input type="submit" class="btn btn-primary" value="Đăng bình luận">
+                                            <input type="submit" class="btn btn-primary" value="Đăng bình luận" onclick="alert('Bình luận của bạn sẽ được hiển thị sau khi được phê duyệt')">
                                         </div>
                                     </div>
                                 </div>

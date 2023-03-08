@@ -11,12 +11,13 @@
 @endsection
 @section('main')
     <main id="main">
+        @section('breadcrumbs')
+            {{ Breadcrumbs::render('list-page', $categories) }}
+        @endsection
         <section>
             <div class="container">
                 <div class="row">
-
                     <div class="col-md-9" data-aos="fade-up">
-                            <h3 class="category-title">Danh mục: {{$categories->name}}</h3>
                         @foreach ($posts as $post)
                             <div class="d-md-flex post-entry-2 half">
                                 <a href="{{$post->id}}" class="me-4 thumbnail">

@@ -9,17 +9,50 @@ use App\Models\Posts;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    public function login()
-    {
-        return view('backend.login');
+    public function login(Request $request){
+        if($request->method()=='GET'){
+            return view('backend.login');
+        }else{
+            $credentials = $request->only('username', 'password');
+            if (Auth::attempt($credentials)) {
+                return view('backend.dashboard');
+            }else{
+                return "Validate!!";
+            }
+        }
     }
-
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
+    }
+    public function register(Request $request){
+        if($request->method()=='GET'){
+            return view('backend.registerManager');
+        }else{
+            $avatar = $request->file('avatar');
+            $filename = date('YmdHi') . $avatar->getClientOriginalName();
+            $avatar->move(public_path('assets/img'), $filename);
+            $dataInsert = [
+                'fullname' => $request->fullname,
+                'email' => $request->email,
+                'username' => $request->username,
+                'password' =>Hash::make($request->password),
+                'avatar' => $avatar,
+                'role' => 1
+            ];
+            User::create($dataInsert);
+            return redirect()->route('login');
+        }
+    }
     public function dashboard()
     {
-        return view('backend.dashboard');
+        $admin = User::all();
+        return view('backend.dashboard', compact('admin'));
     }
 
     public function managerUser()
@@ -94,7 +127,6 @@ class AdminController extends Controller
             return redirect()->route('article-manager');
         }
     }
-
     public function managerCmt(Request $request)
     {
         $cmt = Comments::simplePaginate(30);
@@ -109,7 +141,6 @@ class AdminController extends Controller
         $deleteCmt->delete();
         return redirect()->route('comment-manager');
     }
-
     public function updateCheck($id)
     {
         $data = [
