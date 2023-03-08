@@ -38,7 +38,9 @@ Route::prefix('/admin')->group(function (){
 
 
     Route::get( '/managerUser', [AdminController::class, 'managerUser'] )->name('user-manager');
-    Route::get('/delete/{id}', [AdminController::class, 'deleteUser'])->name('delete-user');
+
+    Route::match(['get', 'post'], '/delete/{id}', [AdminController::class, 'deleteUser'])->name('del-user');
+
     Route::match(['get', 'post'], '/editUser/{id}', [AdminController::class, 'editUser'] )->name('edit-user');
 
     Route::match(['get', 'post'], '/article', [AdminController::class, 'article'] )->name('article-manager');
@@ -48,8 +50,6 @@ Route::prefix('/admin')->group(function (){
     Route::get ('/managerCmt', [AdminController::class, 'managerCmt'] )->name('comment-manager');
     Route::get('/deleteCheck/{id}', [AdminController::class, 'deleteCheck'] )->name('comment-check-del');
     Route::get('/updateCheck/{id}', [AdminController::class, 'updateCheck'] )->name('comment-check-up');
-//    Route::post('/checkCmt/{id}', [AdminController::class, 'checkCmt'] )->name('comment-check');
-//    Route::post('/managerCmt', [AdminController::class, 'managerCmt'] )->name('comment-delete');
 
 });
 
