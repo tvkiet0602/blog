@@ -76,7 +76,7 @@
                         </div><!-- End Comments -->
 
                         <!-- ======= Comments Form ======= -->
-                        <form method="POST">
+                        <form method="POST" >
                             <div class="row justify-content-center mt-5">
                                 <div class="col-lg-12">
                                     <h5 class="comment-title">Để lại Bình luận</h5>
@@ -86,7 +86,7 @@
                                                   placeholder="Nhập nội dung bình luận" cols="30" rows="3"></textarea>
                                         </div>
                                         <div class="col-12">
-                                            <input type="submit" class="btn btn-primary" value="Đăng bình luận">
+                                            <input type="submit" class="btn btn-primary" value="Đăng bình luận" onclick="alert('Bình luận của bạn sẽ được hiển thị sau khi được phê duyệt')">
                                         </div>
                                     </div>
                                 </div>
