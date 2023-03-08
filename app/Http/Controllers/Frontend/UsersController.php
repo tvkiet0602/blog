@@ -82,7 +82,7 @@ class UsersController extends Controller
                 'email' => $request->email,
                 'username' => $request->username,
                 'password' =>Hash::make($request->password),
-                'avatar' => $avatar
+                'avatar' => $filename
             ];
         User::create($dataInsert);
         return redirect()->route('login');
