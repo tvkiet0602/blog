@@ -12,6 +12,9 @@
 @endsection
 @section('main')
     <main id="main">
+        @section('breadcrumbs')
+            {{ Breadcrumbs::render('detail', $detail) }}
+        @endsection
         <section class="single-post-content">
             <div class="container">
                 <div class="row">
