@@ -34,6 +34,7 @@ Route::prefix('/admin')->group(function (){
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::match(['get', 'post'], '/login', [AdminController::class, 'login'])->name('login');
     Route::get ('/logout', [AdminController::class, 'logout'])->name('logout');
+    Route::match(['get', 'post'], '/register', [AdminController::class, 'register'])->name('register');
 
 
     Route::get( '/managerUser', [AdminController::class, 'managerUser'] )->name('user-manager');

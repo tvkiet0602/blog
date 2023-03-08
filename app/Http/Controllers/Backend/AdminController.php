@@ -9,6 +9,7 @@ use App\Models\Posts;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -24,13 +25,30 @@ class AdminController extends Controller
             }
         }
     }
-
     public function logout()
     {
         Auth::logout();
         return redirect()->route('login');
     }
-
+    public function register(Request $request){
+        if($request->method()=='GET'){
+            return view('backend.registerManager');
+        }else{
+            $avatar = $request->file('avatar');
+            $filename = date('YmdHi') . $avatar->getClientOriginalName();
+            $avatar->move(public_path('assets/img'), $filename);
+            $dataInsert = [
+                'fullname' => $request->fullname,
+                'email' => $request->email,
+                'username' => $request->username,
+                'password' =>Hash::make($request->password),
+                'avatar' => $avatar,
+                'role' => 1
+            ];
+            User::create($dataInsert);
+            return redirect()->route('login');
+        }
+    }
     public function dashboard()
     {
         $admin = User::all();
