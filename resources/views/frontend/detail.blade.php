@@ -49,26 +49,29 @@
 
                         <!-- ======= Comments ======= -->
                         <div class="comments">
-                            <h5 class="comment-title py-4">Bình luận </h5>
+                            <h5 class="comment-title py-4">Bình luận ({{$count}})</h5>
                             @foreach($cmt as $items)
-                                <div class="comment d-flex mb-4">
-                                    <div class="flex-shrink-0">
-                                        <div class="avatar avatar-sm rounded-circle">
-                                            <img class="avatar-img" src="{{asset('assets/img/'.$items->users->avatar)}}"
-                                                 alt="Avatar comment" class="img-fluid">
+                                @if($items->check == 1)
+                                    <div class="comment d-flex mb-4">
+                                        <div class="flex-shrink-0">
+                                            <div class="avatar avatar-sm rounded-circle">
+                                                <img class="avatar-img"
+                                                     src="{{asset('assets/img/'.$items->users->avatar)}}"
+                                                     alt="Avatar comment" class="img-fluid">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="flex-grow-1 ms-2 ms-sm-3">
-                                        <div class="comment-meta d-flex align-items-baseline">
-                                            <h6 class="me-2">{{$items->users->fullname}}</h6>
-                                            <span class="text-muted">{{$items->created_at}}</span>
-                                        </div>
-                                        <div class="comment-body">
-                                            {{$items->content}}
+                                        <div class="flex-grow-1 ms-2 ms-sm-3">
+                                            <div class="comment-meta d-flex align-items-baseline">
+                                                <h6 class="me-2">{{$items->users->fullname}}</h6>
+                                                <span class="text-muted">{{$items->created_at}}</span>
+                                            </div>
+                                            <div class="comment-body">
+                                                {{$items->content}}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                             @endforeach
                         </div><!-- End Comments -->
 
