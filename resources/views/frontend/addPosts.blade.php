@@ -11,6 +11,9 @@
 @endsection
 @section('main')
     <main id="main">
+        @section('breadcrumbs')
+            {{ Breadcrumbs::render('add-posts') }}
+        @endsection
         <section id="contact" class="contact mb-5">
             <div class="container" data-aos="fade-up">
                 <div class="col-lg-12 text-center mb-5">

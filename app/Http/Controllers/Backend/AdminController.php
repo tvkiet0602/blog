@@ -55,21 +55,17 @@ class AdminController extends Controller
         return view('backend.dashboard', compact('admin'));
     }
 
-    public function managerUser(Request $request)
+    public function managerUser()
     {
         $info = User::all();
-        if ($request->method() == 'GET') {
-            return view('backend.managerUser', compact('info'));
-        } else {
-            return view('backend.managerUser');
-        }
+        return view('backend.managerUser', compact('info'));
     }
 
     public function deleteUser($id)
     {
-        $delete = User::find($id);
-        $delete->delete();
-        return redirect()->route('user-manager', compact('delete'));
+        $del = User::find($id);
+        $del->delete();
+        return redirect()->route('user-manager');
     }
 
     public function editUser(Request $request, $id)
@@ -85,7 +81,7 @@ class AdminController extends Controller
                 'fullname' => $request->fullname,
                 'username' => $request->username,
                 'email' => $request->email,
-                'avatar' => $avatar
+                'avatar' => $filenames
             ];
             User::where('id', $id)->update($data);
             return redirect()->route('user-manager');
@@ -118,14 +114,14 @@ class AdminController extends Controller
 //            dd($articleEdit);
             return view('backend.editArticle', compact('articleEdit'));
         } else {
-//            $img_url = $request->file('img_url');
-//            $filenames = date('YmdHi') . $img_url->getClientOriginalName();
-//            $img_url->move(public_path('assets/img'), $filenames);
+            $img_url = $request->file('img_url');
+            $filenames = date('YmdHi') . $img_url->getClientOriginalName();
+            $img_url->move(public_path('assets/img'), $filenames);
             $updateArticle = [
                 'title' => $request->title,
                 'content' => $request->contents,
                 'describe_img' => $request->describe_img,
-//                'img_url' => $img_url
+                'img_url' => $filenames
             ];
             Posts::where('id', $id)->update($updateArticle);
             return redirect()->route('article-manager');
@@ -138,6 +134,7 @@ class AdminController extends Controller
         return view('backend.managerComment', compact('cmt', 'art'));
 
     }
+
     public function deleteCheck($id)
     {
         $deleteCmt = Comments::find($id);

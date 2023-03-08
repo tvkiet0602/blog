@@ -48,7 +48,9 @@
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item" href="{{route('edit-user', ['id' => $items->id])}}">Chỉnh sửa</a>
-                                                    <a onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng {{$items->fullname}}?')" class="dropdown-item" href="">Xóa</a>
+
+                                                      <a onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng {{$items->fullname}}?')" class="dropdown-item" href="{{route('del-user', ['id' => $items->id])}}">Xóa</a>
+
                                                 </div>
                                             </div>
                                         </td>
