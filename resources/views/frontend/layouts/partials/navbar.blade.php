@@ -52,9 +52,10 @@
                     </li>
                     <li><a href="@yield('posts-add')">Tạo bài viết</a></li>
                     <li><a href="{{route('logout')}}">Đăng xuất</a></li>
+                    <li><a>~ Xin chào <b> {{auth()->user()->fullname}}</b></a></li>
                 </ul>
             </nav>
-            <div class="position-relative">
+            <div class="position-relative" style="display: none;">
                 <a href="#" class="mx-2"><span class="bi-facebook"></span></a>
                 <a href="#" class="mx-2"><span class="bi-twitter"></span></a>
                 <a href="#" class="mx-2"><span class="bi-instagram"></span></a>
@@ -62,7 +63,7 @@
                 <i class="bi bi-list mobile-nav-toggle"></i>
 
                 <!-- ======= Search Form ======= -->
-                <div class="search-form-wrap js-search-form-wrap">
+                <div class="search-form-wrap js-search-form-wrap" >
                     <form action="search-result.html" class="search-form">
                         <span class="icon bi-search"></span>
                         <input type="text" placeholder="Search" class="form-control">

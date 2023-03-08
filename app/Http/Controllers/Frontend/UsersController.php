@@ -103,6 +103,7 @@ class UsersController extends Controller
             }else{
                 return "Validate!!";
             }
+            return view('frontend.homePage');
         }
     }
 
