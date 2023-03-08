@@ -25,9 +25,10 @@ class UsersController extends Controller
         $detail = Posts::find($id);
         $idCategories = $detail->categories;
         $cmt = Comments::all();
+        $count = Comments::where('post_id', $id)->where('check', 1)->count();
         $idCat = Posts::where('categories_id', $idCategories->id)->where('id','!=', $id)->orderByDesc('created_at')->take(5)->get();
         if($request->method() == 'GET'){
-            return view('frontend.detail', compact( 'detail', 'idCat', 'idCategories', 'cmt'));
+            return view('frontend.detail', compact( 'detail', 'idCat', 'idCategories', 'cmt', 'count'));
         }else{
             $cmt = [
                 'content' => $request->content_cmt,
