@@ -32,6 +32,7 @@
                                 <tr>
                                     <th scope="col">STT</th>
                                     <th scope="col">Bài viết gần nhất</th>
+                                    <th> dfgvdfg</th>
                                     <th scope="col">Người tạo</th>
                                     <th scope="col">Thời gian tạo</th>
                                     <th scope="col">Bình luận</th>
@@ -42,6 +43,8 @@
                                 @foreach($article as $key => $items)
                                     <tr>
                                         <th>{{$key + 1}}</th>
+                                        <td><img src="{{asset('assets/img/'.$items->users->avatar)}}" alt="akjsfgdcjhgsdfgjdsh"></td>
+
                                         <td>{{$items->title}}</td>
                                         <td>{{$items->users->fullname}}</td>
                                         <td>{{$items->created_at}}</td>
