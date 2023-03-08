@@ -89,6 +89,9 @@
                                             <input type="file" name="avatar" class="form-control" id="yourAvatar" required>
                                             <div class="invalid-feedback">Please enter a valid Avatar!</div>
                                         </div>
+                                        <div class="col-12">
+                                            <input type="hidden" name="role" class="form-control">
+                                        </div>
 
                                         <div class="col-12"><br>
                                             <button class="btn btn-primary w-100" type="submit">Đăng ký</button>
