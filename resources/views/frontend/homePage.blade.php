@@ -13,6 +13,9 @@
 
 @section('main')
     <main id="main">
+        @section('breadcrumbs')
+            {{ Breadcrumbs::render('home') }}
+        @endsection
         <!-- ======= Post Grid Section ======= -->
         <section id="posts" class="posts">
             <div class="container" data-aos="fade-up">
@@ -20,6 +23,7 @@
                     {{--                    Left Post--}}
                     <div class="col-lg-4">
                         <div class="post-entry-1 lg">
+
                             <h2>Bài viết mới nhất</h2>
                             <a href="{{route('detail', ['id' => $post->id])}}"><img
                                     src="{{asset('assets/img/'.$post->img_url)}}" alt="Ảnh bài viết mới nhất"
@@ -74,7 +78,8 @@
 @endsection
 @section('footer-cat')
     @foreach($idCat as $items)
-        <li><a href="{{route('list-page', ['id' => $items->id])}}"><i class="bi bi-chevron-right"></i>{{$items->name }}</a></li>
+        <li><a href="{{route('list-page', ['id' => $items->id])}}"><i class="bi bi-chevron-right"></i>{{$items->name }}
+            </a></li>
     @endforeach
 @endsection
 {{--@section('footer-categories-id')--}}

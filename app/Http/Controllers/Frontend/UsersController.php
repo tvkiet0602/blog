@@ -7,8 +7,10 @@ use App\Models\Comments;
 use App\Models\Posts;
 use App\Models\Categories;
 use App\Models\User;
+use Illuminate\Auth\Authenticatable;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 class UsersController extends Controller
 {
     public function home()
@@ -23,6 +25,7 @@ class UsersController extends Controller
 
     public function detailPosts(Request $request, $id){
         $detail = Posts::find($id);
+        $count = Comments::where('post_id', $id)->where('check', 1)->count();
         $idCategories = $detail->categories;
         $cmt = Comments::all();
         $count = Comments::where('post_id', $id)->where('check', 1)->count();
@@ -69,5 +72,47 @@ class UsersController extends Controller
             return view('frontend.listPage', compact('posts', 'categories', 'idCat'));
     }
 
+    public function register(Request $request){
+        if($request->method()=='GET'){
+            return view('frontend.register');
+        }else{
+            $avatar = $request->file('avatar');
+            $filename = date('YmdHi') . $avatar->getClientOriginalName();
+            $avatar->move(public_path('./assets/img/'), $filename);
+            $dataInsert = [
+                'fullname' => $request->fullname,
+                'email' => $request->email,
+                'username' => $request->username,
+                'password' =>Hash::make($request->password),
+                'avatar' => $filename,
+                'role' => 0
+            ];
+        User::create($dataInsert);
+        return redirect()->route('login');
+        }
+    }
 
+    public function login(Request $request){
+        $posts = Posts::orderByDesc('created_at')->simplePaginate(9);
+        $idCat = Categories::all();
+        if($request->method()=='GET'){
+            return view('frontend.login');
+        }else{
+            $login = $request->only('username', 'password');
+            if (Auth::attempt($login)) {
+                foreach ($posts as $post){
+                    return view('frontend.homePage', compact('posts', 'post', 'idCat'));
+                }
+            }else{
+                return "Validate!!";
+            }
+            return view('frontend.homePage');
+        }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
+    }
 }
