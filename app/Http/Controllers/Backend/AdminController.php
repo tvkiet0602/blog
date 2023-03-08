@@ -12,15 +12,21 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function login(Request $request){
-        if($request->method()=='GET'){
+    public function login(Request $request)
+    {
+        $admin = $request->only('username', 'password');
+        $login = Auth::attempt($admin);
+        if ($request->method() == 'GET') {
             return view('backend.login');
-        }else{
-            $credentials = $request->only('username', 'password');
-            if (Auth::attempt($credentials)) {
-                return view('backend.dashboard');
+        } else {
+            if(auth()->user()->role == 1){
+                if ($login) {
+                    return view('backend.dashboard');
+                } else {
+                    return "Validate!!";
+                }
             }else{
-                return "Validate!!";
+                return view('backend.layouts.partials.403');
             }
         }
     }
@@ -113,6 +119,7 @@ class AdminController extends Controller
             return redirect()->route('article-manager');
         }
     }
+
     public function managerCmt(Request $request)
     {
         $cmt = Comments::simplePaginate(30);
@@ -120,12 +127,14 @@ class AdminController extends Controller
         return view('backend.managerComment', compact('cmt', 'art'));
 
     }
+
     public function deleteCheck($id)
     {
         $deleteCmt = Comments::find($id);
         $deleteCmt->delete();
         return redirect()->route('comment-manager');
     }
+
     public function updateCheck($id)
     {
         $data = [
