@@ -18,63 +18,16 @@
 
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
-            <li class="nav-item dropdown pe-3">
-                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="assets/img/@yield('session-avatar')" alt="Avatar-Admin" class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">@yield('session-name')</span>
-                </a><!-- End Profile Iamge Icon -->
-
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                    <li class="dropdown-header">
-                        <h6>Kevin Anderson</h6>
-                        <span>Web Designer</span>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                            <i class="bi bi-person"></i>
-                            <span>My Profile</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                            <i class="bi bi-gear"></i>
-                            <span>Account Settings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                            <i class="bi bi-question-circle"></i>
-                            <span>Need Help?</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <i class="bi bi-box-arrow-right"></i>
-                            <span>Sign Out</span>
-                        </a>
-                    </li>
-
-                </ul><!-- End Profile Dropdown Items -->
-            </li><!-- End Profile Nav -->
-
+            <li class="nav-item dropdown pe-4">
+                <a><span>ADMIN: <b>{{auth()->user()->fullname}}</b></span></a>
+            </li>
+            <li class="nav-item dropdown pe-4">
+                <span><a href="{{route('logout')}}">Đăng xuất </a></span>
+            </li>
         </ul>
-    </nav><!-- End Icons Navigation -->
+    </nav>
+
+
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
@@ -91,11 +44,11 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" >
+                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse">
                     <i class="bi bi-layout-text-window-reverse"></i><span>Quản lý bài báo</span><i
                         class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="tables-nav" class="nav-content collapse " >
+                <ul id="tables-nav" class="nav-content collapse ">
                     <li>
                         <a href="{{route('article-manager')}}">
                             <i class="bi bi-circle"></i><span>Quản lý bài viết</span>
@@ -109,10 +62,10 @@
                 </ul>
             </li><!-- End Tables Nav -->
             <li class="nav-item">
-                <a class="nav-link collapsed"data-bs-toggle="collapse" href="#">
+                <a class="nav-link collapsed" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-layout-text-window-reverse"></i><span>Quản lý Permission & Role</span>
                 </a>
-                <a class="nav-link collapsed"  data-bs-toggle="collapse" href="#">
+                <a class="nav-link collapsed" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-layout-text-window-reverse"></i><span>Cấu hình chung</span>
                 </a>
             </li>

@@ -12,9 +12,23 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function login()
+    public function login(Request $request){
+        if($request->method()=='GET'){
+            return view('backend.login');
+        }else{
+            $credentials = $request->only('username', 'password');
+            if (Auth::attempt($credentials)) {
+                return view('backend.dashboard');
+            }else{
+                return "Validate!!";
+            }
+        }
+    }
+
+    public function logout()
     {
-        return view('backend.login');
+        Auth::logout();
+        return redirect()->route('login');
     }
 
     public function dashboard()

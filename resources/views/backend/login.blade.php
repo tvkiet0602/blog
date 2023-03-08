@@ -53,7 +53,7 @@
 
                 <div class="row justify-content-center">
                     <div class="col-lg-6">
-                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                        <form method="post" class="php-email-form">
                             <div class="form-group mt-3">
                                 <input type="text" class="form-control" name="username" id="username"
                                        placeholder="Username" required>
@@ -71,8 +71,10 @@
                                 <button type="submit">Đăng nhập</button>
                             </div>
                             <br>
-{{--                            <div class="text-center"><a href=""><i class="bi bi-chevron-right"></i> Bạn chưa có tài--}}
-{{--                                    khoản ?<i class="bi bi-chevron-left"></i></a></div>--}}
+                            <div class="text-center">
+                                <p class="small mb-0">Bạn muốn có tài khoản? <a href="{{route('register')}}">Tạo tài khoản mới</a></p>
+                            </div>
+                            @csrf
                         </form>
                     </div>
 
