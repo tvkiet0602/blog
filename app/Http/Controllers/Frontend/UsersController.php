@@ -75,13 +75,14 @@ class UsersController extends Controller
         }else{
             $avatar = $request->file('avatar');
             $filename = date('YmdHi') . $avatar->getClientOriginalName();
-            $avatar->move(public_path('assets/img'), $filename);
+            $avatar->move(public_path('./assets/img/'), $filename);
             $dataInsert = [
                 'fullname' => $request->fullname,
                 'email' => $request->email,
                 'username' => $request->username,
                 'password' =>Hash::make($request->password),
-                'avatar' => $avatar
+                'avatar' => $avatar,
+                'role' => 0
             ];
         User::create($dataInsert);
         return redirect()->route('login');
