@@ -18,6 +18,8 @@ Route::prefix('/')->group(function (){
 
     Route::match(['get', 'post'], '/register', [UsersController::class, 'register'])->name('register');
     Route::match(['get', 'post'], '/login', [UsersController::class, 'login'])->name('login');
+    Route::get ('/logout', [UsersController::class, 'logout'])->name('logout');
+
     Route::match(['get', 'post'], '/detail/{id}', [UsersController::class, 'detailPosts'])->name('detail');
 //    Route::post('/detail/{id}', [UsersController::class, 'detailPosts'])->name('comment');
     Route::match(['post', 'get'], '/add/{id}', [UsersController::class, 'addPosts'])->name('add-posts');
