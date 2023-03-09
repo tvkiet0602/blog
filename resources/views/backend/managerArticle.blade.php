@@ -12,12 +12,6 @@
 
         <div class="pagetitle">
             <h1>Quản lý bài viết</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Quản lý User</li>
-                </ol>
-            </nav>
         </div><!-- End Page Title -->
 
         <section class="section">
@@ -41,7 +35,7 @@
                                 <tbody>
                                 @foreach($article as $key => $items)
                                     <tr>
-                                        <th>{{$key + 1}}</th>
+                                        <th>{{$key ++}}</th>
                                         <td>{{$items->title}}</td>
                                         <td>{{$items->users->fullname}}</td>
                                         <td>{{$items->created_at}}</td>

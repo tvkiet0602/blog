@@ -16,6 +16,9 @@ class UsersController extends Controller
 {
     public function home()
     {
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
         $posts = Posts::orderByDesc('created_at')->simplePaginate(9);
         $idCat = Categories::all();
         foreach ($posts as $post){
@@ -93,20 +96,15 @@ class UsersController extends Controller
     }
 
     public function login(Request $request){
-        $posts = Posts::orderByDesc('created_at')->simplePaginate(9);
-        $idCat = Categories::all();
         if($request->method()=='GET'){
             return view('frontend.login');
         }else{
             $login = $request->only('username', 'password');
             if (Auth::attempt($login)) {
-                foreach ($posts as $post){
-                    return view('frontend.homePage', compact('posts', 'post', 'idCat'));
-                }
+                return redirect()->route('home');
             }else{
                 return "Validate!!";
             }
-            return view('frontend.homePage');
         }
     }
 

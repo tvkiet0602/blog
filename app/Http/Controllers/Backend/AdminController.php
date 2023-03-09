@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -22,26 +23,29 @@ class AdminController extends Controller
         if ($request->method() == 'GET') {
             return view('backend.login');
         } else {
-            if(auth()->user()->role == 1){
+            if (auth()->user()->role == 1) {
                 if ($login) {
-                    return view('backend.dashboard');
+                    return redirect()->route('dashboard');
                 } else {
                     return "Validate!!";
                 }
-            }else{
+            } else {
                 return view('backend.layouts.partials.403');
             }
         }
     }
+
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('login-admin');
     }
-    public function register(Request $request){
-        if($request->method()=='GET'){
+
+    public function register(Request $request)
+    {
+        if ($request->method() == 'GET') {
             return view('backend.registerManager');
-        }else{
+        } else {
             $avatar = $request->file('avatar');
             $filename = date('YmdHi') . $avatar->getClientOriginalName();
             $avatar->move(public_path('assets/img'), $filename);
@@ -49,7 +53,7 @@ class AdminController extends Controller
                 'fullname' => $request->fullname,
                 'email' => $request->email,
                 'username' => $request->username,
-                'password' =>Hash::make($request->password),
+                'password' => Hash::make($request->password),
                 'avatar' => $filename,
                 'role' => 1
             ];
@@ -57,6 +61,7 @@ class AdminController extends Controller
             return redirect()->route('login');
         }
     }
+
     public function dashboard()
     {
         $admin = User::all();
@@ -67,16 +72,6 @@ class AdminController extends Controller
     {
         $info = User::all();
         return view('backend.managerUser', compact('info'));
-    }
-    public function managerPermission()
-    {
-        $info = User::all();
-//        $role = Role::create(['name' => 'Writer']);
-//        $permission = Permission::create(['name' => 'Edit Articles']);
-//        $role->givePermissionTo($permission);
-        return view('backend.managerPermission', compact('info'));
-
-
     }
 
     public function deleteUser($id)
@@ -172,4 +167,30 @@ class AdminController extends Controller
         Comments::where('id', $id)->update($data);
         return redirect()->route('comment-manager');
     }
+
+    public function editPermission(Request $request, $id)
+    {
+        $permission = Permission::with('roles')->get();
+        $roles = Role::with('permissions')->where('id', $id)->get();
+        $r = Permission::all();
+        foreach ($roles as $role) {
+            if ($request->method() == 'GET') {
+                return view('backend.editPermission', compact('permission', 'roles', 'role'));
+            } else {
+                $idRole = Role::find($id);
+                $idRole->syncPermissions([$request->permission_id]);
+                return redirect()->route('permission-manager');
+            }
+        }
+    }
+
+    public function managerPermission()
+    {
+        $info = User::with('roles')->get();
+        $roles = Role::with('users')->get();
+        $permissions = Permission::with('roles')->get();
+
+        return view('backend.managerPermission', compact('info', 'roles', 'permissions'));
+    }
+
 }

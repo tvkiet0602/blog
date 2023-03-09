@@ -7,12 +7,6 @@
 
         <div class="pagetitle">
             <h1>Quản lý người dùng</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Quản lý User</li>
-                </ol>
-            </nav>
         </div><!-- End Page Title -->
 
         <section class="section">
@@ -49,8 +43,7 @@
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item" href="{{route('edit-user', ['id' => $items->id])}}">Chỉnh sửa</a>
 
-{{--                                                      <a onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng {{$items->fullname}}?')" class="dropdown-item" href="{{route('del-user', ['id' => $items->id])}}">Xóa</a>--}}
-{{--                                                    <a href="{{route('del_user', ['id' => $items->id])}}">Xóa</a>--}}
+                                                      <a onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng {{$items->fullname}}?')" class="dropdown-item" href="{{route('del_user', ['id' => $items->id])}}">Xóa</a>
 
                                                 </div>
                                             </div>
