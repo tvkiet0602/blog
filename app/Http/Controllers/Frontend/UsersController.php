@@ -11,6 +11,7 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+
 class UsersController extends Controller
 {
     public function home()
@@ -115,4 +116,5 @@ class UsersController extends Controller
         Auth::logout();
         return redirect()->route('login');
     }
+
 }
