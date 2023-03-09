@@ -56,7 +56,9 @@
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item"
                                                        href="{{route('detail', ['id' => $items->id])}}">Xem chi tiết</a>
-                                                    <a class="dropdown-item" href="{{route('edit-article', ['id' => $items->id])}}">Chỉnh sửa</a>
+                                                    @can('edit-article')
+                                                        <a class="dropdown-item" href="{{route('edit-article', ['id' => $items->id])}}">Chỉnh sửa</a>
+                                                    @endcan
                                                     <a onclick="return confirm('Bạn có chắc chắn muốn xóa bài viết {{$items->title}}?')"
                                                        class="dropdown-item"
                                                        href="{{route('delete-article', ['id' => $items->id])}}">Xóa</a>

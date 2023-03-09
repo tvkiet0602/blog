@@ -121,6 +121,9 @@ class AdminController extends Controller
 
     public function editArticle(Request $request, $id)
     {
+        $role = Role::find($id);
+        $permission = Permission::find($id);
+        $role->givePermissionTo($permission);
         $articleEdit = Posts::find($id);
         if ($request->method() == 'GET') {
 //            dd($articleEdit);
