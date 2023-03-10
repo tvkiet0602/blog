@@ -54,18 +54,22 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-6">
                         <form method="post" class="php-email-form">
+                            @if ($errors->any())
+                                <div class="alert alert-danger" style="text-align: center">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <h6 class="aside-tags"><i class="bi bi-emoji-dizzy"></i> {{ $error }}</h6>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <div class="form-group mt-3">
                                 <input type="text" class="form-control" name="username" id="username"
-                                       placeholder="Username" required>
+                                       placeholder="Username" >
                             </div>
                             <div class="form-group mt-3">
                                 <input type="password" class="form-control" name="password" id="password"
-                                       placeholder="Password" required>
-                            </div>
-                            <div class="my-3">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">Your message has been sent. Thank you!</div>
+                                       placeholder="Password" >
                             </div>
                             <div class="text-center">
                                 <button type="submit">Đăng nhập</button>
@@ -74,6 +78,7 @@
                             <div class="text-center">
                                 <p class="small mb-0">Bạn muốn có tài khoản? <a href="{{route('register')}}">Tạo tài khoản mới</a></p>
                             </div>
+
                             @csrf
                         </form>
                     </div>

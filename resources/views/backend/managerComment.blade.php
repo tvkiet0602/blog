@@ -7,12 +7,6 @@
 
         <div class="pagetitle">
             <h1>Quản lý bài viết</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Quản lý User</li>
-                </ol>
-            </nav>
         </div><!-- End Page Title -->
 
         <section class="section">
@@ -33,10 +27,12 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($cmt as $key => $items)
+                                <?php $i = 0; ?>
+                                @foreach($cmt as $items)
                                     @if($items->check == 0)
+
                                         <tr>
-                                            <th>{{$key ++ }}</th>
+                                            <th> {{++ $i }} </th>
                                             <td>{{$items->posts->title}}</td>
                                             <td>{{$items->created_at}}</td>
                                             <td>{{$items->content}}</td>

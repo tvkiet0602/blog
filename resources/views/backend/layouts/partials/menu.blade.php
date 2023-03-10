@@ -23,9 +23,9 @@
                 <img src="{{asset('assets/img/'.auth()->user()->avatar)}}" alt="Profile" class="rounded-circle">
                 </a>
             </li>
-            <li class="nav-item dropdown pe-4"><a><span>ADMIN: <b>{{auth()->user()->fullname}}</b></span></a></li>
+            <li class="nav-item dropdown pe-4"><a><span><b>{{auth()->user()->fullname}}</b> - {{auth()->user()->getRoleNames()}} </span></a></li>
             <li class="nav-item dropdown pe-4">
-                <span><a href="{{route('logout')}}">Đăng xuất </a></span>
+                <span><a href="{{route('login-admin')}}">Đăng xuất </a></span>
             </li>
         </ul>
     </nav>
@@ -63,13 +63,10 @@
                         </a>
                     </li>
                 </ul>
-            </li><!-- End Tables Nav -->
+            </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-layout-text-window-reverse"></i><span>Quản lý Permission & Role</span>
-                </a>
-                <a class="nav-link collapsed" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-layout-text-window-reverse"></i><span>Cấu hình chung</span>
+                <a class="nav-link collapsed" href="{{route('permission-manager')}}">
+                    <i class="bi bi-layout-text-window-reverse"></i><span>Quản lý Quyền & Vai trò</span>
                 </a>
             </li>
         </ul>

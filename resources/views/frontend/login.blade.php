@@ -31,8 +31,8 @@
     <link href="/assets/css/variables.css" rel="stylesheet">
     <link href="/assets/css/main.css" rel="stylesheet">
     <style>
-        body{
-            background-image: url('https://img.freepik.com/free-photo/stationery-near-glasses-keyboard-white-desk_23-2148128438.jpg?w=1380&t=st=1677641504~exp=1677642104~hmac=d4c74ca5ad26958cfda61c6aec384e7947cd6317cb9a2e7bcfeced919111dc1c') ;
+        body {
+            background-image: url('https://img.freepik.com/free-photo/stationery-near-glasses-keyboard-white-desk_23-2148128438.jpg?w=1380&t=st=1677641504~exp=1677642104~hmac=d4c74ca5ad26958cfda61c6aec384e7947cd6317cb9a2e7bcfeced919111dc1c');
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -40,6 +40,7 @@
 </head>
 <body>
 <main>
+
     <div class="container">
         <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
             <div class="container">
@@ -58,34 +59,40 @@
                                     <h5 class="card-title text-center pb-0 fs-4">Đăng nhập với tài khoản của bạn</h5>
                                     <p class="text-center small">Vui lòng nhập Username & Password để đăng nhập</p>
                                 </div>
-
                                 <form method="POST" class="row g-3 needs-validation" novalidate>
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger" style="text-align: center">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <h6 class="aside-tags"><i class="bi bi-emoji-dizzy"></i> {{ $error }}</h6>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                     <div class="col-12">
                                         <label for="yourUsername" class="form-label">Username</label>
                                         <div class="input-group has-validation">
-                                            <input type="text" name="username" class="form-control" id="yourUsername" placeholder="Your Username"  required>
+                                            <input type="text" name="username" class="form-control" id="yourUsername"
+                                                   placeholder="Your Username" required>
                                             <div class="invalid-feedback">Please enter your username.</div>
                                         </div>
                                     </div>
 
                                     <div class="col-12">
                                         <label for="yourPassword" class="form-label">Password</label>
-                                        <input type="password" name="password" class="form-control" id="yourPassword" placeholder="Your Password"  required>
+                                        <input type="password" name="password" class="form-control" id="yourPassword"
+                                               placeholder="Your Password" required>
                                         <div class="invalid-feedback">Please enter your password!</div>
                                     </div>
 
                                     <div class="col-12">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                                            <label class="form-check-label" for="rememberMe">Remember me</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
                                         <button class="btn btn-primary w-100" type="submit">Login</button>
                                     </div>
                                     <div class="col-12">
-                                        <p class="small mb-0">Bạn chưa có tài khoản? <a href="{{route('register')}}">Tạo tài khoản mới</a></p>
+                                        <p class="small mb-0">Bạn chưa có tài khoản? <a href="{{route('register')}}">Tạo
+                                                tài khoản mới</a></p>
                                     </div>
+
                                     @csrf
                                 </form>
 
@@ -100,40 +107,5 @@
     </div>
 </main><!-- End #main -->
 
-
-{{--<section id="contact" class="contact">--}}
-{{--    <div class="container">--}}
-{{--        <div class="text-center">--}}
-{{--            <h2>Chào mừng bạn đến với KeitBlog</h2>--}}
-{{--        </div><br><br>--}}
-{{--        <div class="text-center">--}}
-{{--            <h2>ĐĂNG NHẬP</h2>--}}
-{{--        </div>--}}
-
-{{--        <div class="row justify-content-center">--}}
-{{--            <div class="col-lg-6">--}}
-{{--                <form action="forms/contact.php" method="post" role="form" class="php-email-form">--}}
-{{--                    <div class="form-group mt-3">--}}
-{{--                        <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>--}}
-{{--                    </div>--}}
-{{--                    <div class="form-group mt-3">--}}
-{{--                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>--}}
-{{--                    </div>--}}
-{{--                    <div class="my-3">--}}
-{{--                        <div class="loading">Loading</div>--}}
-{{--                        <div class="error-message"></div>--}}
-{{--                        <div class="sent-message">Your message has been sent. Thank you!</div>--}}
-{{--                    </div>--}}
-{{--                    <div class="text-center"><button type="submit">Đăng nhập</button></div><br>--}}
-{{--                    <div class="text-center"><a href=""><i class="bi bi-chevron-right"></i> Bạn chưa có tài khoản ?<i class="bi bi-chevron-left"></i></a></div>--}}
-{{--                </form>--}}
-{{--            </div>--}}
-
-{{--        </div>--}}
-
-{{--    </div>--}}
-{{--</section><!-- End Contact Us Section -->--}}
-
-</main><!-- End #main -->
 </body>
 </html>

@@ -2,9 +2,6 @@
 @section('title')
     HomePage
 @endsection
-@section('posts-add')
-    {{route('add-posts', ['id' => 1])}}
-@endsection
 @section('nav-cat')
     @foreach($idCat as $items)
         <li><a href="{{route('list-page', ['id' => $items->id])}}">{{$items->name }}</a></li>
@@ -76,15 +73,4 @@
         </section> <!-- End Post Grid Section -->
     </main><!-- End #main -->
 @endsection
-@section('footer-cat')
-    @foreach($idCat as $items)
-        <li><a href="{{route('list-page', ['id' => $items->id])}}"><i class="bi bi-chevron-right"></i>{{$items->name }}
-            </a></li>
-    @endforeach
-@endsection
-{{--@section('footer-categories-id')--}}
-{{--    {{$post->categories->id}}--}}
-{{--@endsection--}}
-{{--@section('footer-categories-name')--}}
-{{--    {{$post->categories->name}}--}}
-{{--@endsection--}}
+

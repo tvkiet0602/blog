@@ -18,8 +18,8 @@
                         @yield('nav-cat')
                     </ul>
                 </li>
-                <li><a href="@yield('posts-add')">Tạo bài viết</a></li>
-                <li><a href="{{route('logout')}}">Đăng xuất</a></li>
+                <li><a href="{{route('add-posts', ['id' => auth()->user()->id])}}">Tạo bài viết</a></li>
+                <li><a href="{{route('logout-user')}}">Đăng xuất</a></li>
                 <li><a>~ Xin chào <b> {{auth()->user()->fullname}}</b></a></li>
             </ul>
         </nav>

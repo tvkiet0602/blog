@@ -2,11 +2,8 @@
 @section('title')
     HomePage
 @endsection
-@section('posts-add')
-    {{route('add-posts', ['id' => 1])}}
-@endsection
 @section('nav-cat')
-    @foreach($idCat as $items)
+    @foreach($cat as $items)
         <li><a href="{{route('list-page', ['id' => $items->id])}}">{{$items->name }}</a></li>
     @endforeach
 @endsection
@@ -27,6 +24,17 @@
                                 <span>{{$detail->created_at}}</span>
                                 <span class="mx-1">&bullet;</span>
                                 {{$detail->users->fullname}}</span>
+                                @php
+                                    if(Auth::check()){
+                                        if($detail->user_id == auth()->user()->id){
+                                @endphp
+                                <span class="mx-1">&bullet;</span>
+                                <span><a style="font-size: 14px" href="{{route('edit-posts', ['id' => $detail->id])}}">Chỉnh sửa</a></span>
+                                <span class="mx-1">&bullet;</span>
+                                @php
+                                    }
+                                }
+                                @endphp
                             </div>
                             <h1 class="mb-5">{{$detail->title}}</h1>
                             <p><span class="firstcharacter">{{substr($detail->content, 0, 1)}}</span>
@@ -76,7 +84,7 @@
                         </div><!-- End Comments -->
 
                         <!-- ======= Comments Form ======= -->
-                        <form method="POST" >
+                        <form method="POST">
                             <div class="row justify-content-center mt-5">
                                 <div class="col-lg-12">
                                     <h5 class="comment-title">Để lại Bình luận</h5>
@@ -86,7 +94,8 @@
                                                   placeholder="Nhập nội dung bình luận" cols="30" rows="3"></textarea>
                                         </div>
                                         <div class="col-12">
-                                            <input type="submit" class="btn btn-primary" value="Đăng bình luận" onclick="alert('Bình luận của bạn sẽ được hiển thị sau khi được phê duyệt')">
+                                            <input type="submit" class="btn btn-primary" value="Đăng bình luận"
+                                                   onclick="alert('Bình luận của bạn sẽ được hiển thị sau khi được phê duyệt')">
                                         </div>
                                     </div>
                                 </div>
