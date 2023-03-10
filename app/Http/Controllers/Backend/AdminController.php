@@ -18,11 +18,19 @@ class AdminController extends Controller
 {
     public function login(Request $request)
     {
-        $admin = $request->only('username', 'password');
-        $login = Auth::attempt($admin);
         if ($request->method() == 'GET') {
             return view('backend.login');
         } else {
+            $request->validate([
+                'username' => 'required',
+                'password' => 'required|min:6',
+            ], [
+                    'username.required' => 'Username không được để trống!',
+                    'password.required' => 'Password không được để trống!',
+                ]
+            );
+            $admin = $request->only('username', 'password');
+            $login = Auth::attempt($admin);
             if (auth()->user()->role == 1) {
                 if ($login) {
                     return redirect()

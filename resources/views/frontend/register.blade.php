@@ -61,6 +61,15 @@
                                     </div>
 
                                     <form method="POST" class="row g-3 needs-validation" novalidate enctype="multipart/form-data">
+                                        @if ($errors->any())
+                                            <div class="alert alert-danger" >
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <h6 class="aside-tags"><i class="bi bi-emoji-dizzy"></i> {{ $error }}</h6>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
                                         <div class="col-12">
                                             <label for="yourUsername" class="form-label">Username</label>
                                             <div class="input-group has-validation">

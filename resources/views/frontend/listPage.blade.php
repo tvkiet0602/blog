@@ -23,7 +23,7 @@
                         @if($posts->count() >= 1)
                             @foreach ($posts as $post)
                                 <div class="d-md-flex post-entry-2 half">
-                                    <a href="{{$post->id}}" class="me-4 thumbnail">
+                                    <a href="{{route('detail', ['id' => $post->id])}}" class="me-4 thumbnail">
                                         <img src="{{asset('assets/img/'.$post->img_url)}}"
                                              alt="Ảnh bài viết về {{$post->categories->name}}" class="img-fluid">
                                     </a>
@@ -32,7 +32,7 @@
                                             <span>{{$post->created_at}}</span>
                                         </div>
                                         <h3>
-                                            <a href="single-post.html">{{$post->title}}</a>
+                                            <a href="{{route('detail', ['id' => $post->id])}}">{{$post->title}}</a>
                                         </h3>
                                         <p>
                                             @if(strlen($post->content) > 200)
@@ -81,7 +81,7 @@
                             <ul class="aside-tags list-unstyled">
                                 @foreach($idCat as $cat)
                                     <li>
-                                        <a href="{{route('list-page', ['id'=>$cat->id])}}">{{$cat->name}}</a>
+                                        <a class="aside-tags" href="{{route('list-page', ['id'=>$cat->id])}}">{{$cat->name}}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -91,9 +91,4 @@
             </div>
         </section>
     </main><!-- End #main -->
-@endsection
-@section('footer-cat')
-    @foreach($idCat as $items)
-        <li><a href="{{route('list-page', ['id' => $items->id])}}">{{$items->name }}</a></li>
-    @endforeach
 @endsection

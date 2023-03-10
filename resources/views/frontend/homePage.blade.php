@@ -73,9 +73,4 @@
         </section> <!-- End Post Grid Section -->
     </main><!-- End #main -->
 @endsection
-@section('footer-cat')
-    @foreach($idCat as $items)
-        <li><a href="{{route('list-page', ['id' => $items->id])}}"><i class="bi bi-chevron-right"></i>{{$items->name }}
-            </a></li>
-    @endforeach
-@endsection
+

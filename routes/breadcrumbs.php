@@ -21,5 +21,11 @@ Breadcrumbs::for('add-posts', function ($trail) {
 // Trang chủ > Danh mục
 Breadcrumbs::for('list-page', function ($trail, $categories) {
     $trail->parent('home');
-    $trail->push('Danh mục: '.$categories->name, route('list-page', $categories->id));
+    $trail->push('Danh mục: '.$categories->name, route('list-page', ['id', $categories->id]));
+});
+
+// Trang chủ > Chỉnh sửa
+Breadcrumbs::for('edit-posts', function ($trail, $categories) {
+    $trail->parent('home');
+    $trail->push('Cập nhật', route('edit-posts', $categories->id));
 });

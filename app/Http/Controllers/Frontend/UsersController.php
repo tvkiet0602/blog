@@ -39,13 +39,14 @@ class UsersController extends Controller
         $count = Comments::where('post_id', $id)
             ->where('check', 1)
             ->count();
+        $cat = Categories::all();
         $idCat = Posts::where('categories_id', $idCategories->id)
             ->where('id', '!=', $id)
             ->orderByDesc('created_at')
             ->take(5)->get();
         if ($request->method() == 'GET') {
             return view('frontend.detail',
-                compact('detail', 'idCat', 'idCategories', 'cmt', 'count'));
+                compact('detail', 'idCat', 'idCategories', 'cmt', 'count', 'cat'));
         } else {
             $cmt = [
                 'content' => $request->content_cmt,
@@ -63,6 +64,18 @@ class UsersController extends Controller
             ->find($id);
         $categories = Categories::all();
         if ($request->method() == 'POST') {
+            $request->validate([
+                'title' => 'required',
+                'contents' => 'required',
+                'categories_id' => 'required',
+                'img_url' => 'required',
+            ], [
+                    'title.required' => 'Vui lòng nhập tên tiêu đề bài viết!',
+                    'contents.required' => 'Vui lòng nhập nội dung cho bài viết!',
+                    'categories_id.required' => 'Vui lòng chọn thể loại cho bài viết!',
+                    'img_url.required' => 'Ảnh bài viết không được để trống!',
+                ]
+            );
             $file = $request
                 ->file('img_url');
             $filename = date('YmdHi').$file
@@ -74,8 +87,9 @@ class UsersController extends Controller
                 'img_url' => $filename,
                 'describe_img' => $request->describe_img,
                 'categories_id' => $request->categories_id,
-                'user_id' => $user_id->user_id
+                'user_id' => auth()->user()->id
             ];
+
             Posts::create($add);
             return redirect()
                 ->route('home');
@@ -84,9 +98,24 @@ class UsersController extends Controller
                 compact('user_id', 'categories'));
         }
     }
+
     public function editPosts(Request $request, $id){
         $categories = Categories::all();
-        return view('frontend.editPosts', compact('categories'));
+        $edit = Posts::find($id);
+        if ($request->method() == 'GET') {
+            return view('frontend.editPosts',
+                compact('edit', 'categories'));
+        } else {
+            $updatePost = [
+                'title' => $request->title,
+                'content' => $request->contents,
+                'describe_img' => $request->describe_img
+            ];
+            Posts::where('id', $id)
+                ->update($updatePost);
+            return redirect()
+                ->route('home');
+        }
     }
     public function listPage($id)
     {
@@ -104,6 +133,22 @@ class UsersController extends Controller
         if ($request->method() == 'GET') {
             return view('frontend.register');
         } else {
+            $request->validate([
+                'fullname' => 'required',
+                'username' => 'required',
+                'password' => 'required',
+                'password' => 'required|min:6',
+                'email' => 'required',
+                'avatar' => 'required',
+            ], [
+                    'fullname.required' => 'Họ và tên không được để trống!',
+                    'username.required' => 'Username không được để trống!',
+                    'password.required' => 'Password không được để trống!',
+                    'password.min' => 'Password phải có ít nhất 6 ký tự',
+                    'email.required' => 'Email không hợp lệ!',
+                    'avatar.required' => 'Ảnh đại diện không được để trống!',
+                ]
+            );
             $avatar = $request
                 ->file('avatar');
             $filename = date('YmdHi') . $avatar->getClientOriginalName();
@@ -123,15 +168,24 @@ class UsersController extends Controller
     }
     public function login(Request $request)
     {
+
         if ($request->method() == 'GET') {
             return view('frontend.login');
         } else {
+            $request->validate([
+                'username' => 'required',
+                'password' => 'required|min:6',
+            ], [
+                    'username.required' => 'Username không được để trống!',
+                    'password.required' => 'Password không được để trống!',
+                ]
+            );
             $login = $request->only('username', 'password');
             if (Auth::attempt($login)) {
                 return redirect()
                     ->route('home');
-            } else {
-                return "Validate!!";
+            }else{
+                return "Loi";
             }
         }
     }
