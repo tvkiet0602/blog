@@ -25,70 +25,80 @@ class AdminController extends Controller
         } else {
             if (auth()->user()->role == 1) {
                 if ($login) {
-                    return redirect()->route('dashboard');
+                    return redirect()
+                        ->route('dashboard');
                 } else {
                     return "Validate!!";
                 }
             } else {
-                return view('backend.layouts.partials.403');
+                return view('error.403');
             }
         }
     }
-
     public function logout()
     {
         Auth::logout();
         return redirect()->route('login-admin');
     }
-
-    public function register(Request $request)
+    public function addUser(Request $request)
     {
+        $roles = Role::all();
         if ($request->method() == 'GET') {
-            return view('backend.registerManager');
+            return view('backend.addUser',
+                compact('roles'));
         } else {
-            $avatar = $request->file('avatar');
-            $filename = date('YmdHi') . $avatar->getClientOriginalName();
-            $avatar->move(public_path('assets/img'), $filename);
             $dataInsert = [
                 'fullname' => $request->fullname,
                 'email' => $request->email,
                 'username' => $request->username,
                 'password' => Hash::make($request->password),
-                'avatar' => $filename,
-                'role' => 1
+                'role' => 1,
+                'name' => $request->has_role,
             ];
-            User::create($dataInsert);
-            return redirect()->route('login');
+            $new = User::create($dataInsert);
+            if ($new) {
+                $idRole = User::find($new->id);
+                $idRole->assignRole($request->has_role);
+            }
+            return redirect()->route('user-manager');
         }
     }
-
     public function dashboard()
     {
-        $admin = User::all();
-        return view('backend.dashboard', compact('admin'));
+        $user = User::all()
+            ->count();
+        $cmt = Comments::all()
+            ->count();
+        $article = Posts::all()
+            ->count();
+        $cat = Categories::all()
+            ->count();
+        return view('backend.dashboard',
+            compact('user', 'cat', 'cmt', 'article'));
     }
-
     public function managerUser()
     {
         $info = User::all();
-        return view('backend.managerUser', compact('info'));
+        return view('backend.managerUser',
+            compact('info'));
     }
-
     public function deleteUser($id)
     {
         $del = User::find($id);
         $del->delete();
-        return redirect()->route('user-manager');
+        return redirect()
+            ->route('user-manager');
     }
-
     public function editUser(Request $request, $id)
     {
         $info = User::find($id);
         if ($request->method() == 'GET') {
-            return view('backend.editUser', compact('info'));
+            return view('backend.editUser',
+                compact('info'));
         } else {
             $avatar = $request->file('avatar');
-            $filenames = date('YmdHi') . $avatar->getClientOriginalName();
+            $filenames = date('YmdHi').$avatar
+                    ->getClientOriginalName();
             $avatar->move(public_path('assets/img'), $filenames);
             $data = [
                 'fullname' => $request->fullname,
@@ -96,30 +106,33 @@ class AdminController extends Controller
                 'email' => $request->email,
                 'avatar' => $filenames
             ];
-            User::where('id', $id)->update($data);
-            return redirect()->route('user-manager');
+            User::where('id', $id)
+                ->update($data);
+            return redirect()
+                ->route('user-manager');
         }
     }
-
     public function article(Request $request)
     {
         $cmt = Comments::all();
-        $count = Comments::all()->count();
-        $article = Posts::orderByDesc('created_at')->simplePaginate(10);
+        $count = Comments::all()
+            ->count();
+        $article = Posts::orderByDesc('created_at')
+            ->simplePaginate(10);
         if ($request->method() == 'GET') {
-            return view('backend.managerArticle', compact('article', 'cmt', 'count'));
-        } else {
-
+            return view('backend.managerArticle',
+                compact('article', 'cmt', 'count'));
         }
     }
-
     public function deleteArticle($id)
     {
         $deleteArt = Posts::find($id);
-        $deleteArt->delete();
-        return redirect()->route('article-manager', compact('deleteArt'));
+        $deleteArt
+            ->delete();
+        return redirect()
+            ->route('article-manager',
+                compact('deleteArt'));
     }
-
     public function editArticle(Request $request, $id)
     {
         $role = Role::find($id);
@@ -127,70 +140,83 @@ class AdminController extends Controller
         $role->givePermissionTo($permission);
         $articleEdit = Posts::find($id);
         if ($request->method() == 'GET') {
-//            dd($articleEdit);
-            return view('backend.editArticle', compact('articleEdit'));
+            return view('backend.editArticle',
+                compact('articleEdit'));
         } else {
             $img_url = $request->file('img_url');
-            $filenames = date('YmdHi') . $img_url->getClientOriginalName();
-            $img_url->move(public_path('assets/img'), $filenames);
+            $filenames = date('YmdHi').$img_url
+                    ->getClientOriginalName();
+            $img_url
+                ->move(public_path('assets/img'), $filenames);
             $updateArticle = [
                 'title' => $request->title,
                 'content' => $request->contents,
                 'describe_img' => $request->describe_img,
                 'img_url' => $filenames
             ];
-            Posts::where('id', $id)->update($updateArticle);
-            return redirect()->route('article-manager');
+            Posts::where('id', $id)
+                ->update($updateArticle);
+            return redirect()
+                ->route('article-manager');
         }
     }
-
     public function managerCmt(Request $request)
     {
         $cmt = Comments::simplePaginate(30);
         $art = Posts::all();
-        return view('backend.managerComment', compact('cmt', 'art'));
-
+        return view('backend.managerComment',
+            compact('cmt', 'art'));
     }
-
     public function deleteCheck($id)
     {
         $deleteCmt = Comments::find($id);
-        $deleteCmt->delete();
-        return redirect()->route('comment-manager');
+        $deleteCmt
+            ->delete();
+        return redirect()
+            ->route('comment-manager');
     }
-
     public function updateCheck($id)
     {
         $data = [
             'check' => 1
         ];
-        Comments::where('id', $id)->update($data);
-        return redirect()->route('comment-manager');
+        Comments::where('id', $id)
+            ->update($data);
+        return redirect()
+            ->route('comment-manager');
     }
-
     public function editPermission(Request $request, $id)
     {
-        $permission = Permission::with('roles')->get();
-        $roles = Role::with('permissions')->where('id', $id)->get();
+        $permission = Permission::with('roles')
+            ->get();
+        $roles = Role::with('permissions')
+            ->where('id', $id)
+            ->get();
         $r = Permission::all();
         foreach ($roles as $role) {
             if ($request->method() == 'GET') {
-                return view('backend.editPermission', compact('permission', 'roles', 'role'));
+                return view('backend.editPermission',
+                    compact('permission', 'roles', 'role'));
             } else {
                 $idRole = Role::find($id);
-                $idRole->syncPermissions([$request->permission_id]);
-                return redirect()->route('permission-manager');
+                $idRole
+                    ->syncPermissions([$request->permission_id]);
+                return redirect()
+                    ->route('permission-manager');
             }
         }
     }
-
     public function managerPermission()
     {
-        $info = User::with('roles')->get();
-        $roles = Role::with('users')->get();
-        $permissions = Permission::with('roles')->get();
-
-        return view('backend.managerPermission', compact('info', 'roles', 'permissions'));
+        $info = User::with('roles')
+            ->get();
+        $roles = Role::with('users')
+            ->get();
+        $idRole = Role::find($roles);
+        $permissions = Permission::with('roles')
+            ->get();
+        return view('backend.managerPermission',
+            compact('info', 'roles', 'permissions', 'idRole'));
     }
 
 }

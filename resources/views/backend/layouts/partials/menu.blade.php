@@ -23,7 +23,7 @@
                 <img src="{{asset('assets/img/'.auth()->user()->avatar)}}" alt="Profile" class="rounded-circle">
                 </a>
             </li>
-            <li class="nav-item dropdown pe-4"><a><span>ADMIN: <b>{{auth()->user()->fullname}}</b></span></a></li>
+            <li class="nav-item dropdown pe-4"><a><span><b>{{auth()->user()->fullname}}</b> - {{auth()->user()->getRoleNames()}} </span></a></li>
             <li class="nav-item dropdown pe-4">
                 <span><a href="{{route('login-admin')}}">Đăng xuất </a></span>
             </li>

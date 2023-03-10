@@ -8,7 +8,10 @@
         <div class="pagetitle">
             <h1>Quản lý người dùng</h1>
         </div><!-- End Page Title -->
-
+        <a href="{{route('add-user')}}" class="btn btn-secondary" type="button">
+            <i class="bi bi-person-plus"></i>
+            Thêm mới
+        </a>
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
@@ -37,13 +40,18 @@
                                         <td>{{$items->created_at}}</td>
                                         <td>
                                             <div class="dropdown">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                        id="dropdownMenuButton" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
                                                     Cập nhật
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="{{route('edit-user', ['id' => $items->id])}}">Chỉnh sửa</a>
+                                                    <a class="dropdown-item"
+                                                       href="{{route('edit-user', ['id' => $items->id])}}">Chỉnh sửa</a>
 
-                                                      <a onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng {{$items->fullname}}?')" class="dropdown-item" href="{{route('del_user', ['id' => $items->id])}}">Xóa</a>
+                                                    <a onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng {{$items->fullname}}?')"
+                                                       class="dropdown-item"
+                                                       href="{{route('del_user', ['id' => $items->id])}}">Xóa</a>
 
                                                 </div>
                                             </div>
@@ -58,7 +66,13 @@
             </div>
         </section>
     </main>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 @endsection

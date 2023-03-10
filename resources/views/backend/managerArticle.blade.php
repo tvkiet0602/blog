@@ -9,11 +9,9 @@
 </style>
 @section('main')
     <main id="main" class="main">
-
         <div class="pagetitle">
             <h1>Quản lý bài viết</h1>
         </div><!-- End Page Title -->
-
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
@@ -35,7 +33,7 @@
                                 <tbody>
                                 @foreach($article as $key => $items)
                                     <tr>
-                                        <th>{{$key ++}}</th>
+                                        <th>{{$key +1}}</th>
                                         <td>{{$items->title}}</td>
                                         <td>{{$items->users->fullname}}</td>
                                         <td>{{$items->created_at}}</td>
@@ -51,7 +49,9 @@
                                                     <a class="dropdown-item"
                                                        href="{{route('detail', ['id' => $items->id])}}">Xem chi tiết</a>
                                                     @can('edit-article')
-                                                        <a class="dropdown-item" href="{{route('edit-article', ['id' => $items->id])}}">Chỉnh sửa</a>
+                                                        <a class="dropdown-item"
+                                                           href="{{route('edit-article', ['id' => $items->id])}}">Chỉnh
+                                                            sửa</a>
                                                     @endcan
                                                     <a onclick="return confirm('Bạn có chắc chắn muốn xóa bài viết {{$items->title}}?')"
                                                        class="dropdown-item"

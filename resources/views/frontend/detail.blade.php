@@ -2,9 +2,6 @@
 @section('title')
     HomePage
 @endsection
-@section('posts-add')
-    {{route('add-posts', ['id' => 1])}}
-@endsection
 @section('nav-cat')
     @foreach($idCat as $items)
         <li><a href="{{route('list-page', ['id' => $items->id])}}">{{$items->name }}</a></li>

@@ -2,12 +2,14 @@
 @section('title')
     Create a blog
 @endsection
-@section('posts-add')
-    {{route('add-posts', ['id' => 1])}}
-@endsection
 @section('logout') @endsection
 @section('home')
     {{route('home')}}
+@endsection
+@section('nav-cat')
+    @foreach($categories as $items)
+        <li><a href="{{route('list-page', ['id' => $items->id])}}">{{$items->name }}</a></li>
+    @endforeach
 @endsection
 @section('main')
     <main id="main">
@@ -22,7 +24,7 @@
 
                 <div class="form mt-5">
 
-                    <form action="{{route('add-posts', ['id' => $user_id])}}" method="post" role="form"
+                    <form action="{{route('add-posts', ['id' => auth()->user()->id])}}" method="post" role="form"
                           class="php-email-form" enctype="multipart/form-data">
                         <div class="row">
                             <div class="form-group">
@@ -67,4 +69,9 @@
         </section>
     </main><!-- End #main -->
 
+@endsection
+@section('footer-cat')
+    @foreach($categories as $items)
+        <li><a href="{{route('list-page', ['id' => $items->id])}}">{{$items->name }}</a></li>
+    @endforeach
 @endsection

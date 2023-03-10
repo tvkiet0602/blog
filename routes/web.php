@@ -24,6 +24,7 @@ Route::prefix('/')->group(function (){
     Route::match(['get', 'post'], '/detail/{id}', [UsersController::class, 'detailPosts'])->name('detail');
 //    Route::post('/detail/{id}', [UsersController::class, 'detailPosts'])->name('comment');
     Route::match(['post', 'get'], '/add/{id}', [UsersController::class, 'addPosts'])->name('add-posts');
+    Route::match(['post', 'get'], '/editPosts/{id}', [UsersController::class, 'editPosts'])->name('edit-posts');
 
     Route::match(['post', 'get'], '/list/{id}', [UsersController::class, 'listPage'])->name('list-page');
 });
@@ -34,7 +35,7 @@ Route::prefix('/admin')->group(function (){
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::match(['get', 'post'], '/login', [AdminController::class, 'login'])->name('login-admin');
     Route::get ('/logoutAdmin', [AdminController::class, 'logout'])->name('logout-admin');
-    Route::match(['get', 'post'], '/register', [AdminController::class, 'register'])->name('register');
+    Route::match(['get', 'post'], '/addUser', [AdminController::class, 'addUser'])->name('add-user');
 
 
     Route::get( '/managerUser', [AdminController::class, 'managerUser'] )->name('user-manager');

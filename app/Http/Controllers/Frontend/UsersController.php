@@ -16,42 +16,57 @@ class UsersController extends Controller
 {
     public function home()
     {
-        if(!Auth::check()){
-            return redirect()->route('login');
+        if (!Auth::check()) {
+            return redirect()
+                ->route('login');
         }
-        $posts = Posts::orderByDesc('created_at')->simplePaginate(9);
+        $posts = Posts::orderByDesc('created_at')
+            ->simplePaginate(9);
         $idCat = Categories::all();
-        foreach ($posts as $post){
-            return view('frontend.homePage', compact('posts', 'post', 'idCat'));
+        foreach ($posts as $post) {
+            return view('frontend.homePage',
+                compact('posts', 'post', 'idCat'));
         }
     }
-
-    public function detailPosts(Request $request, $id){
+    public function detailPosts(Request $request, $id)
+    {
         $detail = Posts::find($id);
-        $count = Comments::where('post_id', $id)->where('check', 1)->count();
+        $count = Comments::where('post_id', $id)
+            ->where('check', 1)
+            ->count();
         $idCategories = $detail->categories;
         $cmt = Comments::all();
-        $count = Comments::where('post_id', $id)->where('check', 1)->count();
-        $idCat = Posts::where('categories_id', $idCategories->id)->where('id','!=', $id)->orderByDesc('created_at')->take(5)->get();
-        if($request->method() == 'GET'){
-            return view('frontend.detail', compact( 'detail', 'idCat', 'idCategories', 'cmt', 'count'));
-        }else{
+        $count = Comments::where('post_id', $id)
+            ->where('check', 1)
+            ->count();
+        $idCat = Posts::where('categories_id', $idCategories->id)
+            ->where('id', '!=', $id)
+            ->orderByDesc('created_at')
+            ->take(5)->get();
+        if ($request->method() == 'GET') {
+            return view('frontend.detail',
+                compact('detail', 'idCat', 'idCategories', 'cmt', 'count'));
+        } else {
             $cmt = [
                 'content' => $request->content_cmt,
                 'post_id' => $id,
-                'user_id'=> 1
+                'user_id' => 1
             ];
             Comments::create($cmt);
-            return redirect()->route('detail', ['id' => $detail]);
+            return redirect()
+                ->route('detail', ['id' => $detail]);
         }
     }
-
-    public function addPosts(Request $request, $id){
-        $user_id = Posts::with('users')->find($id);
+    public function addPosts(Request $request, $id)
+    {
+        $user_id = Posts::with('users')
+            ->find($id);
         $categories = Categories::all();
         if ($request->method() == 'POST') {
-            $file = $request->file('img_url');
-            $filename = date('YmdHi') . $file->getClientOriginalName();
+            $file = $request
+                ->file('img_url');
+            $filename = date('YmdHi').$file
+                    ->getClientOriginalName();
             $file->move(public_path('assets/img'), $filename);
             $add = [
                 'title' => $request->title,
@@ -59,55 +74,67 @@ class UsersController extends Controller
                 'img_url' => $filename,
                 'describe_img' => $request->describe_img,
                 'categories_id' => $request->categories_id,
-                'user_id'=> $user_id->user_id
+                'user_id' => $user_id->user_id
             ];
             Posts::create($add);
-            return redirect()->route('home');
-        }else{
-            return view('frontend.addPosts', compact('user_id', 'categories'));
+            return redirect()
+                ->route('home');
+        } else {
+            return view('frontend.addPosts',
+                compact('user_id', 'categories'));
         }
     }
-
-    public function listPage($id){
-        $categories = Categories::find($id);
-        $posts = Posts::with('categories')->where('categories_id', $id)->orderByDesc('created_at')->simplePaginate(10);
-        $idCat = Categories::all();
-            return view('frontend.listPage', compact('posts', 'categories', 'idCat'));
+    public function editPosts(Request $request, $id){
+        $categories = Categories::all();
+        return view('frontend.editPosts', compact('categories'));
     }
-
-    public function register(Request $request){
-        if($request->method()=='GET'){
+    public function listPage($id)
+    {
+        $categories = Categories::find($id);
+        $posts = Posts::with('categories')
+            ->where('categories_id', $id)
+            ->orderByDesc('created_at')
+            ->simplePaginate(10);
+        $idCat = Categories::all();
+        return view('frontend.listPage',
+            compact('posts', 'categories', 'idCat'));
+    }
+    public function register(Request $request)
+    {
+        if ($request->method() == 'GET') {
             return view('frontend.register');
-        }else{
-            $avatar = $request->file('avatar');
+        } else {
+            $avatar = $request
+                ->file('avatar');
             $filename = date('YmdHi') . $avatar->getClientOriginalName();
             $avatar->move(public_path('./assets/img/'), $filename);
             $dataInsert = [
                 'fullname' => $request->fullname,
                 'email' => $request->email,
                 'username' => $request->username,
-                'password' =>Hash::make($request->password),
+                'password' => Hash::make($request->password),
                 'avatar' => $filename,
                 'role' => 0
             ];
-        User::create($dataInsert);
-        return redirect()->route('login');
+            User::create($dataInsert);
+            return redirect()
+                ->route('login');
         }
     }
-
-    public function login(Request $request){
-        if($request->method()=='GET'){
+    public function login(Request $request)
+    {
+        if ($request->method() == 'GET') {
             return view('frontend.login');
-        }else{
+        } else {
             $login = $request->only('username', 'password');
             if (Auth::attempt($login)) {
-                return redirect()->route('home');
-            }else{
+                return redirect()
+                    ->route('home');
+            } else {
                 return "Validate!!";
             }
         }
     }
-
     public function logout()
     {
         Auth::logout();

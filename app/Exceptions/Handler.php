@@ -52,6 +52,9 @@ class Handler extends ExceptionHandler
             if($status == "404"){
                 return response()->view('error.404',[] ,404);
             }
+            if($status == "500"){
+                return response()->view('error.500',[] ,500);
+            }
         });
 
     }
