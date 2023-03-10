@@ -26,18 +26,17 @@
                                     <th scope="col">Bài viết gần nhất</th>
                                     <th scope="col">Người tạo</th>
                                     <th scope="col">Thời gian tạo</th>
-                                    <th scope="col">Bình luận</th>
                                     <th scope="col"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($article as $key => $items)
+                                <?php $i = 0; ?>
+                                @foreach($article as $items)
                                     <tr>
-                                        <th>{{$key +1}}</th>
+                                        <th>{{++$i}}</th>
                                         <td>{{$items->title}}</td>
                                         <td>{{$items->users->fullname}}</td>
                                         <td>{{$items->created_at}}</td>
-                                        <td>{{$count}}</td>
                                         <td>
                                             <div class="dropdown">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button"

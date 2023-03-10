@@ -31,9 +31,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($info as $key => $items)
+                                <?php $i = 0 ?>
+                                @foreach($info as $items)
                                     <tr>
-                                        <th>{{$key + 1}}</th>
+                                        <th>{{++$i}}</th>
                                         <td>{{$items->fullname}}</td>
                                         <td>{{$items->username}}</td>
                                         <td>{{$items->email}}</td>

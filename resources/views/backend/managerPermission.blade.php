@@ -24,9 +24,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($roles as $key => $role)
+                                <?php $i = 0 ?>
+                                @foreach($roles as  $role)
                                     <tr>
-                                        <th>{{$key + 1}}</th>
+                                        <th>{{++$i}}</th>
                                         <td> {{$role->name}} </td>
                                         <td>
                                             @php
@@ -67,9 +68,10 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($info as $key => $items)
+                            <?php $i = 0 ?>
+                            @foreach($info as  $items)
                                 <tr>
-                                    <th>{{ $key + 1}}</th>
+                                    <th>{{ ++$i }}</th>
                                     <td>{{$items->fullname}}</td>
                                     <td>{{$items->username}}</td>
                                     <td>@foreach($items->roles as $role)

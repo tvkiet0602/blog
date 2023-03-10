@@ -27,11 +27,12 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($cmt as $key => $items)
+                                <?php $i = 0; ?>
+                                @foreach($cmt as $items)
                                     @if($items->check == 0)
 
                                         <tr>
-                                            <th>  {{$key +1 }}</th>
+                                            <th> {{++ $i }} </th>
                                             <td>{{$items->posts->title}}</td>
                                             <td>{{$items->created_at}}</td>
                                             <td>{{$items->content}}</td>
