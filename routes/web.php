@@ -22,6 +22,7 @@ Route::prefix('/')->group(function (){
     Route::get ('/logoutUser', [UsersController::class, 'logout'])->name('logout-user');
 
     Route::match(['get', 'post'], '/detail/{id}', [UsersController::class, 'detailPosts'])->name('detail');
+
     Route::match(['post', 'get'], '/add/{id}', [UsersController::class, 'addPosts'])->name('add-posts');
     Route::match(['post', 'get'], '/editPosts/{id}', [UsersController::class, 'editPosts'])->name('edit-posts');
 
@@ -29,13 +30,12 @@ Route::prefix('/')->group(function (){
 });
 
 Route::prefix('/admin')->group(function (){
-    Route::match(['get', 'post'], '/login', [AdminController::class, 'login'])->name('login');
+//    Route::match(['get', 'post'], '/login', [AdminController::class, 'login'])->name('login');
 
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::match(['get', 'post'], '/login', [AdminController::class, 'login'])->name('login-admin');
     Route::get ('/logoutAdmin', [AdminController::class, 'logout'])->name('logout-admin');
     Route::match(['get', 'post'], '/addUser', [AdminController::class, 'addUser'])->name('add-user');
-
 
     Route::get( '/managerUser', [AdminController::class, 'managerUser'] )->name('user-manager');
     Route::get( '/managerPermission', [AdminController::class, 'managerPermission'] )->name('permission-manager');

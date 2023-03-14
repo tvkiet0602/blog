@@ -31,11 +31,8 @@ class UsersController extends Controller
     public function detailPosts(Request $request, $id)
     {
         $detail = Posts::find($id);
-        $count = Comments::where('post_id', $id)
-            ->where('check', 1)
-            ->count();
         $idCategories = $detail->categories;
-        $cmt = Comments::all();
+        $cmt = Comments::where('post_id', $id)->get();
         $count = Comments::where('post_id', $id)
             ->where('check', 1)
             ->count();

@@ -11,7 +11,6 @@
                     <div class="col-sm-5">
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="permission_id" >
-
                                     @php
                                     $ischecked = false;
                                         foreach ($role->permissions as $key) {
@@ -21,7 +20,6 @@
                                             }
                                         }
                                     @endphp
-
                                     <input class="form-check-input"
                                            type="checkbox" id="flexSwitchCheckDefault"
                                            name="permission_id[]"
@@ -31,8 +29,6 @@
                                                     echo 'checked';
                                                } @endphp
                                     >
-
-
                             <label class="form-check-label" for="flexSwitchCheckDefault">{{$items->name}}</label>
                         </div>
                     </div>

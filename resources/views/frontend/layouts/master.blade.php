@@ -1,3 +1,7 @@
+
+
+
+
 @include('frontend.layouts.partials.css')
 @include('frontend.layouts.partials.navbar')
 @include('frontend.layouts.partials.breadcrumbs')
