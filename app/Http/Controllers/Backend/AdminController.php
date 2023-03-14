@@ -7,6 +7,10 @@ use App\Models\Categories;
 use App\Models\Comments;
 use App\Models\Posts;
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -48,6 +52,13 @@ class AdminController extends Controller
         Auth::logout();
         return redirect()->route('login-admin');
     }
+
+    /**
+     * Thêm người dùng mới
+     *
+     * @param Request $request
+     * @return Application|Factory|View|RedirectResponse
+     */
     public function addUser(Request $request)
     {
         $roles = Role::all();
@@ -71,6 +82,12 @@ class AdminController extends Controller
             return redirect()->route('user-manager');
         }
     }
+
+    /**
+     * Trang chủ Admin
+     *
+     * @return Application|Factory|View
+     */
     public function dashboard()
     {
         $user = User::all()
@@ -123,8 +140,7 @@ class AdminController extends Controller
     public function article(Request $request)
     {
         $cmt = Comments::all();
-        $count = Comments::all()
-            ->count();
+        $count = $cmt->count();
         $article = Posts::orderByDesc('created_at')
             ->simplePaginate(10);
         if ($request->method() == 'GET') {

@@ -31,8 +31,8 @@
     <link href="/assets/css/variables.css" rel="stylesheet">
     <link href="/assets/css/main.css" rel="stylesheet">
     <style>
-        body{
-            background-image: url('https://img.freepik.com/free-photo/stationery-near-glasses-keyboard-white-desk_23-2148128438.jpg?w=1380&t=st=1677641504~exp=1677642104~hmac=d4c74ca5ad26958cfda61c6aec384e7947cd6317cb9a2e7bcfeced919111dc1c') ;
+        body {
+            background-image: url('https://img.freepik.com/free-photo/stationery-near-glasses-keyboard-white-desk_23-2148128438.jpg?w=1380&t=st=1677641504~exp=1677642104~hmac=d4c74ca5ad26958cfda61c6aec384e7947cd6317cb9a2e7bcfeced919111dc1c');
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -41,116 +41,89 @@
 
 <body>
 <main>
-        <div class="container">
-            <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+    <div class="container">
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-                            <div class="d-flex justify-content-center py-4">
-                                <a href="{{route('register')}}" class="logo d-flex align-items-center w-auto">
-                                    <h2 class="d-none d-lg-block">KeitBlog</h2>
-                                </a>
-                            </div><!-- End Logo -->
+                        <div class="d-flex justify-content-center py-4">
+                            <a href="{{route('register')}}" class="logo d-flex align-items-center w-auto">
+                                <h2 class="d-none d-lg-block">KeitBlog</h2>
+                            </a>
+                        </div><!-- End Logo -->
 
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <div class="pt-4 pb-2">
-                                        <h5 class="card-title text-center pb-0 fs-4">ĐĂNG KÝ TÀI KHOẢN</h5>
-                                        <p class="text-center small">Vui lòng nhập thông tin người dùng để tạo tài khoản mới</p>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="pt-4 pb-2">
+                                    <h5 class="card-title text-center pb-0 fs-4">ĐĂNG KÝ TÀI KHOẢN</h5>
+                                    <p class="text-center small">Vui lòng nhập thông tin người dùng để tạo tài khoản
+                                        mới</p>
+                                </div>
+
+                                <form method="POST" class="row g-3 needs-validation" novalidate
+                                      enctype="multipart/form-data">
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <h6 class="aside-tags"><i
+                                                            class="bi bi-emoji-dizzy"></i> {{ $error }}</h6>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    <div class="col-12">
+                                        <label for="yourUsername" class="form-label">Username</label>
+                                        <div class="input-group has-validation">
+                                            <input type="text" name="username" class="form-control" id="yourUsername"
+                                                   required>
+                                            <div class="invalid-feedback">Please choose a username.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="yourPassword" class="form-label">Password</label>
+                                        <input type="password" name="password" class="form-control" id="yourPassword"
+                                               required>
+                                        <div class="invalid-feedback">Please enter your password!</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="yourName" class="form-label">Your Name</label>
+                                        <input type="text" name="fullname" class="form-control" id="yourName" required>
+                                        <div class="invalid-feedback">Please, enter your name!</div>
                                     </div>
 
-                                    <form method="POST" class="row g-3 needs-validation" novalidate enctype="multipart/form-data">
-                                        @if ($errors->any())
-                                            <div class="alert alert-danger" >
-                                                <ul>
-                                                    @foreach ($errors->all() as $error)
-                                                        <h6 class="aside-tags"><i class="bi bi-emoji-dizzy"></i> {{ $error }}</h6>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        @endif
-                                        <div class="col-12">
-                                            <label for="yourUsername" class="form-label">Username</label>
-                                            <div class="input-group has-validation">
-                                                <input type="text" name="username" class="form-control" id="yourUsername" required>
-                                                <div class="invalid-feedback">Please choose a username.</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="yourPassword" class="form-label">Password</label>
-                                            <input type="password" name="password" class="form-control" id="yourPassword" required>
-                                            <div class="invalid-feedback">Please enter your password!</div>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="yourName" class="form-label">Your Name</label>
-                                            <input type="text" name="fullname" class="form-control" id="yourName" required>
-                                            <div class="invalid-feedback">Please, enter your name!</div>
-                                        </div>
+                                    <div class="col-12">
+                                        <label for="yourEmail" class="form-label">Your Email</label>
+                                        <input type="email" name="email" class="form-control" id="yourEmail" required>
+                                        <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="yourAvatar" class="form-label">Your Avatar</label>
+                                        <input type="file" name="avatar" class="form-control" id="yourAvatar" required>
+                                        <div class="invalid-feedback">Please enter a valid Avatar!</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="hidden" name="role" class="form-control">
+                                    </div>
 
-                                        <div class="col-12">
-                                            <label for="yourEmail" class="form-label">Your Email</label>
-                                            <input type="email" name="email" class="form-control" id="yourEmail" required>
-                                            <div class="invalid-feedback">Please enter a valid Email adddress!</div>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="yourAvatar" class="form-label">Your Avatar</label>
-                                            <input type="file" name="avatar" class="form-control" id="yourAvatar" required>
-                                            <div class="invalid-feedback">Please enter a valid Avatar!</div>
-                                        </div>
-                                        <div class="col-12">
-                                            <input type="hidden" name="role" class="form-control">
-                                        </div>
+                                    <div class="col-12"><br>
+                                        <button class="btn btn-primary w-100" type="submit">Đăng ký</button>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="small mb-0">Bạn đã có tài khoản? <a href="{{route('login')}}">Đăng
+                                                nhập</a></p>
+                                    </div>
+                                    @csrf
+                                </form>
 
-                                        <div class="col-12"><br>
-                                            <button class="btn btn-primary w-100" type="submit">Đăng ký</button>
-                                        </div>
-                                        <div class="col-12">
-                                            <p class="small mb-0">Bạn đã có tài khoản? <a href="{{route('login')}}">Đăng nhập</a></p>
-                                        </div>
-                                        @csrf
-                                    </form>
-
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
-</main><!-- End #main -->
-{{--<section id="contact" class="contact">--}}
-{{--    <div class="container">--}}
-{{--        <div class="text-center">--}}
-{{--            <h2>Chào mừng bạn đến với KeitBlog</h2>--}}
-{{--        </div><br><br>--}}
-{{--        <div class="text-center">--}}
-{{--            <h2>ĐĂNG KÝ TÀI KHOẢN</h2>--}}
-{{--        </div>--}}
-
-{{--        <div class="row justify-content-center">--}}
-{{--            <div class="col-lg-6">--}}
-{{--                <form action="#" method="post" role="form" class="php-email-form">--}}
-{{--                    <div class="form-group mt-3">--}}
-{{--                        <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Your Name" required>--}}
-{{--                    </div>--}}
-{{--                    <div class="form-group mt-3">--}}
-{{--                        <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>--}}
-{{--                    </div>--}}
-{{--                    <div class="form-group mt-3">--}}
-{{--                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>--}}
-{{--                    </div>--}}
-{{--                    <div class="form-group mt-3">--}}
-{{--                        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>--}}
-{{--                    </div>--}}
-{{--                    <div class="text-center"><button type="submit">Đăng ký</button></div>--}}
-{{--                </form>--}}
-{{--            </div>--}}
-
-{{--        </div>--}}
-
-{{--    </div>--}}
-{{--</section><!-- End Contact Us Section -->--}}
-
+            </div>
+        </section>
+    </div>
+</main>
 </body>
 </html>
