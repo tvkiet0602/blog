@@ -47,7 +47,7 @@
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary">Lưu</button>
-                            <button type="cancel" class="btn btn-secondary">Hủy</button>
+                            <a href="{{url()->previous()}}" class="btn btn-secondary" >Hủy</a>
                         </div>
                         @csrf
                     </form><!-- End floating Labels Form -->

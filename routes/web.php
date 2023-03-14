@@ -22,6 +22,7 @@ Route::prefix('/')->group(function (){
     Route::get ('/logoutUser', [UsersController::class, 'logout'])->name('logout-user');
 
     Route::match(['get', 'post'], '/detail/{id}', [UsersController::class, 'detailPosts'])->name('detail');
+
     Route::match(['post', 'get'], '/add/{id}', [UsersController::class, 'addPosts'])->name('add-posts');
     Route::match(['post', 'get'], '/editPosts/{id}', [UsersController::class, 'editPosts'])->name('edit-posts');
 
